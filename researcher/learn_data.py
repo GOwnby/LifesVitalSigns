@@ -26,9 +26,9 @@ def average_dataset(dataset):
     thisDataset = ''
     if dataset == 'N2O':
         thisDataset = 'N2OData.json'
-    else if dataset == 'CFC11':
+    if dataset == 'CFC11':
         thisDataset = 'CFC11Data.json'
-    else if dataset == 'CFC12':
+    if dataset == 'CFC12':
         thisDataset = 'CFC12Data.json'
 
     with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
@@ -66,15 +66,15 @@ def rateOfChange_dataset(dataset):
     thisDataset = ''
     if dataset == 'CO2':
         thisDataset = 'CO2Data.json'
-    else if dataset == 'N2O':
+    if dataset == 'N2O':
         thisDataset = 'N2OData.json'
-    else if dataset == 'CH4':
+    if dataset == 'CH4':
         thisDataset = 'CH4Data.json'
-    else if dataset == 'CFC11':
+    if dataset == 'CFC11':
         thisDataset = 'CFC11Data.json'
-    else if dataset == 'CFC12':
+    if dataset == 'CFC12':
         thisDataset = 'CFC12Data.json'
-    else if dataset == 'Temperature':
+    if dataset == 'Temperature':
         thisDataset = 'TemperatureData.json'
         
     with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
@@ -131,15 +131,15 @@ def basicProjection(dataset):
     thisDataset = ''
     if dataset == 'CO2':
         thisDataset = 'CO2Data'
-    else if dataset == 'N2O':
+    if dataset == 'N2O':
         thisDataset = 'N2OData'
-    else if dataset == 'CH4':
+    if dataset == 'CH4':
         thisDataset = 'CH4Data'
-    else if dataset == 'CFC11':
+    if dataset == 'CFC11':
         thisDataset = 'CFC11Data'
-    else if dataset == 'CFC12':
+    if dataset == 'CFC12':
         thisDataset = 'CFC12Data'
-    else if dataset == 'Temperature':
+    if dataset == 'Temperature':
         thisDataset = 'TemperatureData'
 
     projectedSet = {}
