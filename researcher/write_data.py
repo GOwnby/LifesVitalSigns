@@ -36,28 +36,6 @@ def findStartYear(dataset):
                     return match_year
 
 
-def findCommonStartYear():
-    startYearDataCO2 = findStartYear('CO2')
-    startYearDataN2O = findStartYear('N2O')
-    startYearDataCH4 = findStartYear('CH4')
-    startYearDataCFC11 = findStartYear('CFC11')
-    startYearDataCFC12 = findStartYear('CFC12')
-    startYearDataTemperature = findStartYear('Temperature')
-
-    lowestCommonYear = startYearDataCO2
-    if lowestCommonYear <= startYearDataN2O:
-        lowestCommonYear = startYearDataN2O
-    if lowestCommonYear <= startYearDataCH4:
-        lowestCommonYear = startYearDataCH4
-    if lowestCommonYear <= startYearDataCFC11:
-        lowestCommonYear = startYearDataCFC11
-    if lowestCommonYear <= startYearDataCFC12:
-        lowestCommonYear = startYearDataCFC12
-    if lowestCommonYear <= startYearDataTemperature:
-        lowestCommonYear = startYearDataTemperature
-    
-    return lowestCommonYear
-
 
 def findEndYear(dataset):
     thisDataset = ''
@@ -284,3 +262,25 @@ def write_Temperature():
         fp.close()
         outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
         json.dump(data, outfile)
+
+def findCommonStartYear():
+    startYearDataCO2 = findStartYear('CO2')
+    startYearDataN2O = findStartYear('N2O')
+    startYearDataCH4 = findStartYear('CH4')
+    startYearDataCFC11 = findStartYear('CFC11')
+    startYearDataCFC12 = findStartYear('CFC12')
+    startYearDataTemperature = findStartYear('Temperature')
+
+    lowestCommonYear = startYearDataCO2
+    if lowestCommonYear <= startYearDataN2O:
+        lowestCommonYear = startYearDataN2O
+    if lowestCommonYear <= startYearDataCH4:
+        lowestCommonYear = startYearDataCH4
+    if lowestCommonYear <= startYearDataCFC11:
+        lowestCommonYear = startYearDataCFC11
+    if lowestCommonYear <= startYearDataCFC12:
+        lowestCommonYear = startYearDataCFC12
+    if lowestCommonYear <= startYearDataTemperature:
+        lowestCommonYear = startYearDataTemperature
+    
+    return lowestCommonYear
