@@ -34,6 +34,7 @@ def findStartYear(dataset):
                 if match_year is not None:
                     return match_year
 
+
 def findCommonStartYear():
     startYearDataCO2 = findStartYear('CO2')
     startYearDataN2O = findStartYear('N2O')
