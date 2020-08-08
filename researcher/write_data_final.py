@@ -1,7 +1,7 @@
 import json
 import re
-import learn_data
-import write_data_final
+from this import learn_data
+
 
 
 def findEndYear(dataset):
