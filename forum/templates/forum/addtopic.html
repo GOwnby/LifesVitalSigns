@@ -1,0 +1,5 @@
+<form action="/forum/{{ subject }}/addtopic/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Post">
+</form>

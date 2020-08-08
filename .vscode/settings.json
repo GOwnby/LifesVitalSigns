@@ -1,0 +1,8 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.pythonPath": "/usr/bin/python3",
+    "python.linting.pylintPath": "venv/bin/pylint",
+    "python.linting.prospectorEnabled": true
+
+}

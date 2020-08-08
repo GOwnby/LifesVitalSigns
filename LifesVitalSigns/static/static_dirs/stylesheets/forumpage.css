@@ -1,0 +1,45 @@
+.ForumEntry {
+    width: 80%;
+    height: 75px;
+    background-color: #87e0ff;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    outline-color: black;
+    outline-style: solid;
+    outline-width: 2px;
+}
+
+.EntryText {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.AuthorText {
+    font-family: 'Times New Roman', Times, serif;
+    vertical-align: top;
+}
+
+.DateText {
+    display: inline-block;
+    float: inline-end;
+    font-family: 'Times New Roman', Times, serift;
+}
+
+.Links {
+    text-decoration: none;
+    color: black;
+}
+
+.Author {
+    margin: 0px;
+    padding-right: 8px;
+    display: inline-block;
+    float: right;
+}
+
+.Entry {
+    margin: 0px;
+    padding-left: 16px;
+    display: inline-block;
+    float: left;
+}

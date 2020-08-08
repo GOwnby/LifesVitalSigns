@@ -1,0 +1,30 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="/forum/static/stylesheets/forum.css">
+</head>
+<body style="margin:0;">
+
+<div id="LVSBannerDiv"><a href="/"><img src="/forum/static/banner/hubblespace.jpg" id="LVSBanner"></a></div>
+
+<div id="MenuBar">
+    <a class="MenuLinks" href="/"><h2 class="MenuText">Vital Signs</h2></a>
+    <a class="MenuLinks" href="/forum/"><h2 class="MenuText">Forum</h2></a>
+    <a class="MenuLinks" href="/news/"><h2 class="MenuText">News</h2></a>
+    <a class="MenuLinkUser" href="/forum/user_{{user}}/"><h2 class="MenuText">{{user}}</h2></a>
+    <a class="MenuLinkUserOperate" href="/forum/logout/"><h2 class="MenuText">Logout</h2></a>
+</div>
+
+<form id="form" action="/searchaccount/" method="get">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Search">
+</form>
+
+<div id="ForumsList">
+    <a href="/forum/climatescience/1/"><h3 class="ForumsListText">Climate Science</h3></a>
+    <a href="/forum/environmentalscience/1/"><h3 class="ForumsListText">Environmental Science</h3></a>
+    <a href="/forum/ecology/1/"><h3 class="ForumsListText">Ecology</h3></a>
+    <a href="/forum/technology/1/"><h3 class="ForumsListText">Technology</h3></a>
+</div>
+
+</body>

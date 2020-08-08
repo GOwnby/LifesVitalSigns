@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+    {% load static %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+var dataCO2Past;
+var dataOne = $.getJSON("{% static "js/json/pastCO2Data.json" %}", function (data){
+    dataCO2Past = dataOne.responseJSON;
+});
+
+var dataCO2Current;
+var dataTwo = $.getJSON("{% static "js/json/currentCO2Data.json" %}", function (data){
+    dataCO2Current = dataTwo.responseJSON;
+});
+
+var dataCO2Future;
+var dataThree = $.getJSON("{% static "js/json/futureCO2Data.json" %}", function (data){
+    dataCO2Future = dataThree.responseJSON;
+});
+
+var dataGlobalTempPast;
+var dataFour = $.getJSON("{% static "js/json/pastGlobalTempData.json" %}", function (data){
+    dataGlobalTempPast = dataFour.responseJSON;
+});
+
+var dataGlobalTempCurrent;
+var dataFive = $.getJSON("{% static "js/json/currentGlobalTempData.json" %}", function (data) {
+    dataGlobalTempCurrent = dataFive.responseJSON;
+});
+
+var dataGlobalTempFuture;
+var dataSix = $.getJSON("{% static "js/json/futureGlobalTempData.json" %}", function (data) {
+    dataGlobalTempFuture = dataSix.responseJSON;
+});
+
+var dataArcticIceExtentPast;
+var dataSeven = $.getJSON("{% static "js/json/pastArcticIceExtentData.json" %}", function (data) {
+    dataArcticIceExtentPast = dataSeven.responseJSON;
+});
+
+var dataArcticIceExtentCurrent;
+var dataEight = $.getJSON("{% static "js/json/currentArcticIceExtentData.json" %}", function (data) {
+    dataArcticIceExtentCurrent = dataEight.responseJSON;
+});
+
+var dataArcticIceExtentFuture;
+var dataNine = $.getJSON("{% static "js/json/futureArcticIceExtentData.json" %}", function (data) {
+    dataArcticIceExtentFuture = dataNine.responseJSON;
+});
+
+var dataArcticIceAreaPast;
+var dataTen = $.getJSON("{% static "js/json/pastArcticIceAreaData.json" %}", function (data) {
+    dataArcticIceAreaPast = dataTen.responseJSON;
+});
+
+var dataArcticIceAreaCurrent;
+var dataEleven = $.getJSON("{% static "js/json/currentArcticIceAreaData.json" %}", function (data) {
+    dataArcticIceAreaCurrent = dataEleven.responseJSON;
+});
+
+var dataArcticIceAreaFuture;
+var dataTwelve = $.getJSON("{% static "js/json/futureArcticIceAreaData.json" %}", function (data) {
+    dataArcticIceAreaFuture = dataTwelve.responseJSON;
+});
+
+var CO2Data;
+var getCO2Data = $.getJSON("{% static "js/json/CO2Data.json" %}", function (data){
+    CO2Data = getCO2Data.responseJSON;
+});
+
+var TemperatureData;
+var getTemperatureData = $.getJSON("{% static "js/json/TemperatureData.json" %}", function (data){
+    TemperatureData = getTemperatureData.responseJSON;
+});
+    </script>
+
+    <script type="text/javascript" src="{% static "js/handleVitalInput.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/graphVitalSigns.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "stylesheets/VitalSigns.css" %}" />
+
+</head>
+<body>
+
+<a href="/forum/">The Forum</a>
+
+
+<div id="selectPanel">
+        <div id="triggerCO2" class="triggers" onclick="handleCO2Panel()"><h3 id="CO2">Carbon Dioxide</h3></div>
+        <div id="triggerTemperature" class="triggers" onclick="handleTemperaturePanel()"><h3 id="Temperature">Average Global Temperature</h3></div>
+</div>
+<br><br><br>
+
+<div id="CO2Panel" class="mainPanel">
+    <br>
+    <input type="radio" name="CO2Selector" class="presets" value="1" checked><h5 class="presets">Project Future Using Last 10 years</h5>
+    <input type="radio" name="CO2Selector" class="presets" value="2"><h5 class="presets">Project Future Using Last 50 years</h5>
+    <br>
+    <div class="togglePreset" onclick="handleCO2AdvancedPanel()">Show Advanced Options</div>
+</div>  
+
+<div id="temperaturePanel" class="mainPanel">
+    <br>
+    <input type="radio" name="TempSelector" class="presets" value="1" checked><h5 class="presets">Project Future Using Last 10 years</h5>
+    <input type="radio" name="TempSelector" class="presets" value="2"><h5 class="presets">Project Future Using Last 50 years</h5>
+    <br>
+    <div class="togglePreset" onclick="handleTemperatureAdvancedPanel()">Show Advanced Options</div>
+</div>
+
+<div id="advancedCO2Panel" class="mainPanel">
+    <br>
+    <p>Enter a year range:</p><input type="text" id="CO2Range" class="advancedTextInputs" value="10">
+    <br>
+    <p>Is the rate of change increasing or decreasing? (Conditional)</p>
+    <select id="SignSelectCO2" style="float: left;">
+    <option value="positive">Increasing</option>
+    <option value="negative">Decreasing</option>
+    </select>
+    <p style="float: left;"> by </p><input type="text" id="CO2Change" class="advancedTextInputs" style="float: left;" value="0.5"><h4 style="float: left;">%</h4><p style="float: left;">annually</p>
+    <br>
+    <div class="togglePreset" onclick="handleCO2AdvancedPanel()">Back To Presets</div>
+</div>
+
+<div id="advancedTemperaturePanel" class="mainPanel">
+    <br>
+    <p>Enter a year range:</p><input type="text" id="TemperatureRange" class="advancedTextInputs" value="10">
+    <br>
+    <p>Is the rate of change increasing or decreasing? (Conditional)</p>
+    <select id="SignSelectTemperature" style="float: left;">
+    <option value="positive">Increasing</option>
+    <option value="negative">Decreasing</option>
+    </select>
+    <p style="float: left;"> by </p><input type="text" id="TemperatureChange" class="advancedTextInputs" style="float: left;" value="0.5"><h4 style="float: left;">%</h4><p style="float: left;"> annually</p>
+    <br>
+    <div class="togglePreset" onclick="handleTemperatureAdvancedPanel()">Back To Presets</div>
+</div>
+
+<div id="drawChart" onclick="drawSelectedPanel()">Draw</div>
+
+<br>
+
+<div id="linechart_"></div>
+
+
+
+</body>

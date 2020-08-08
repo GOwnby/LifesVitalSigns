@@ -1,0 +1,6 @@
+<form action="/forum/login/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Login">
+</form>
+<a href="/forum/create_account/"><button type="button">Create Account</button></a>

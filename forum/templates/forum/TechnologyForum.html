@@ -1,0 +1,36 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="/forum/static/stylesheets/forumpage.css">
+</head>
+
+<body>
+    <h2>A Forum For Technology</h2>
+
+    <a href="/forum/"><button id="ForumButton">Forum Home</button></a> <br>
+
+    <a href="/forum/technology/addtopic/"><button id="TopicButton">Add Topic</button></a>
+
+    <ul>
+        {% for entry in entries %}
+        <div class="ForumEntry">
+        <div class="Entry">
+        <a class="Links" href="/forum/technology/post_{{ entry.key }}"><h2 class="EntryText">{{ entry.title }}</h2></a>
+        </div>
+        <div class="Author">
+        <p class="AuthorText">{{ entry.author }}</p>
+        <sub class="DateText">{{ entry.dateposted }}</sub>
+        </div>
+        </div>
+        {% endfor %}
+    </ul>
+
+    {% for each in page %}
+    <a href="/forum/technology/{{ each }}"><p>{{ each }}</p></a>
+    {% endfor %}
+
+
+
+
+
+
+</body>

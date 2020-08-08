@@ -1,0 +1,30 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "stylesheets/forum.css" %}" />
+</head>
+<body style="background-image: url({% static "images/lvsforumbackground.png" %});">
+
+<div id="LVSBannerDiv"><a href="/"><img src="{% static "images/lvsbanner.png" %}" id="LVSBanner"></a></div>
+
+<div id="MenuBar" style="background-image: url({% static "images/lvsmenubar.png" %});">
+    <a class="MenuLinks" href="/"><h2 class="MenuText">Vital Signs</h2></a>
+    <a class="MenuLinks" href="/forum/"><h2 class="MenuText">Forum</h2></a>
+    <a class="MenuLinks" href="/news/"><h2 class="MenuText">News</h2></a>
+    <a class="MenuLinkUser" href="/forum/login/"><h2 class="MenuText">Login</h2></a>
+    <a class="MenuLinkUserOperate" href="/forum/create_account/"><div id="CreateAccount"><h2 class="MenuText">Create Account</h2></div></a>
+</div>
+
+<form id="form" action="/searchaccount/" method="get">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Search">
+</form>
+
+<div id="ForumsList">
+    <a href="/forum/climatescience/1/"><h3 class="ForumsListText">Climate Science</h3></a>
+    <a href="/forum/environmentalscience/1/"><h3 class="ForumsListText">Environmental Science</h3></a>
+    <a href="/forum/ecology/1/"><h3 class="ForumsListText">Ecology</h3></a>
+    <a href="/forum/technology/1/"><h3 class="ForumsListText">Technology</h3></a>
+</div>
+
+</body>

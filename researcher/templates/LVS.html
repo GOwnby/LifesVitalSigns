@@ -1,0 +1,70 @@
+<html>
+    <head>
+        {% load static %}
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <div id="app">
+
+            <div id="classOneSelectors">
+                <div class="graphSelectorClassOne" v-on:click="graph('Global Temperature')">
+                    <h3>Global Temperature</h3>
+                </div>
+
+                <div class="graphSelectorClassOne" v-on:click="graph('Global Ice')">
+                    <h3>Global Ice</h3>
+                </div>
+
+                <div class="graphSelectorClassOne" v-on:click="graph('Greenhouse Gases')">
+                    <h3>Greenhouse Gases</h3>
+                </div>
+            </div>
+
+            <br>
+
+            <div id="classTwoSelectors">
+                <div id="iceSelectors">
+                    <div class="graphSelectorClassIce" v-on:click="graph('Arctic Ice')">
+                        <h3>Arctic Ice</h3>
+                    </div>
+
+                    <div class="graphSelectorClassIce" v-on:click="graph('Antarctic Ice')">
+                        <h3>Antarctic Ice</h3>
+                    </div>
+
+                    <div class="graphSelectorClassIce" v-on:click="graph('Greenland Ice')">
+                        <h3>Greenland Ice</h3>
+                    </div>
+                </div>
+
+                <div id="gasSelectors">
+                    <div class="graphSelectorClassGas" v-on:click="graph('CO2')">
+                        <h3>CO<sub>2</sub></h3>
+                    </div>
+
+                    <div class="graphSelectorClassGas" v-on:click="graph('CO')">
+                        <h3>CO</h3>
+                    </div>
+
+                    <div class="graphSelectorClassGas" v-on:click="graph('CH4')">
+                        <h3>CH<sub>4</sub></h3>
+                    </div>
+
+                    <div class="graphSelectorClassGas" v-on:click="graph('O3')">
+                        <h3>O<sub>3</sub></h3>
+                    </div>
+
+                    <div class="graphSelectorClassGas" v-on:click="graph('N2O')">
+                        <h3>N<sub>2</sub>O</h3>
+                    </div>
+                </div>
+            </div>
+
+
+            [[message]]
+        </div>
+    </body>
+
+    <script src="{% static "js/app.js" %}"></script>
+</html>
