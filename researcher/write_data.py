@@ -2,6 +2,7 @@ import json
 import re
 import learn_data
 
+
 def write_All():
     write_CO2()
     write_N2O()
@@ -9,6 +10,7 @@ def write_All():
     write_CFC11()
     write_CFC12()
     write_Temperature()
+
 
 def findStartYear(dataset):
     thisDataset = ''
@@ -27,7 +29,8 @@ def findStartYear(dataset):
 
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
         for line in fp:
             if not(re.search('#', line)):
                 match_year = re.match(pattern_year, line)
@@ -54,8 +57,9 @@ def findCommonStartYear():
         lowestCommonYear = startYearDataCFC12
     if lowestCommonYear <= startYearDataTemperature:
         lowestCommonYear = startYearDataTemperature
-    
+
     return lowestCommonYear
+
 
 def findEndYear(dataset):
     thisDataset = ''
@@ -78,12 +82,14 @@ def findEndYear(dataset):
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     countLines = 0
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
         for line in fp:
             countLines += 1
     finally:
         thisLine = 0
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
         for line in fp:
             thisLine += 1
             if thisLine == (countLines - 1):
@@ -94,7 +100,8 @@ def findEndYear(dataset):
                 match_year = re.match(pattern_year, line)
                 if match_year is not None:
                     return match_year
-                
+
+
 def findCommonEndYear():
     endYearDataCO2 = findEndYear('CO2')
     endYearDataN2O = findEndYear('N2O')
@@ -114,9 +121,8 @@ def findCommonEndYear():
         highestCommonYear = endYearDataCFC12
     if highestCommonYear >= endYearDataTemperature:
         highestCommonYear = endYearDataTemperature
-    
-    return highestCommonYear
 
+    return highestCommonYear
 
 
 def write_CO2():
@@ -124,7 +130,8 @@ def write_CO2():
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CO2Data.txt')
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CO2Data.txt')
         for line in fp:
             if not(re.search('#', line)):
                 match_year = re.search(pattern_year, line)
@@ -136,8 +143,10 @@ def write_CO2():
                         data[int(this_year)] = float(this_ppm)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
+        outfile = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
         json.dump(data, outfile)
+
 
 def write_N2O():
     data = {}
@@ -145,7 +154,8 @@ def write_N2O():
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/N2OData.txt')
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/N2OData.txt')
         for line in fp:
             if not(re.match('#', line)):
                 if re.match(pattern_year, line):
@@ -154,10 +164,12 @@ def write_N2O():
                     lineEdited = lineEdited[7:]
                     match_ppb1 = re.match(pattern_ppb1, lineEdited)
                     if (str(match_ppb1.group(0)) != 'nan'):
-                        lineEdited = lineEdited.replace(str(match_ppb1.group(0)), '')
+                        lineEdited = lineEdited.replace(
+                            str(match_ppb1.group(0)), '')
                         match_ppb2 = re.match(pattern_ppb2, lineEdited)
                         this_year = str(match_year.group(0))
-                        this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
+                        this_ppb = str(match_ppb1.group(0)) + \
+                            str(match_ppb2.group(0))
                         counter = 1
                         while counter <= 12:
                             try:
@@ -168,16 +180,19 @@ def write_N2O():
                                 data[this_year] = float(this_ppb)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
+        outfile = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
+
 
 def write_CH4():
     data = {}
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CH4Data.txt')
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CH4Data.txt')
         for line in fp:
             if not(re.search('#', line)):
                 match_year = re.search(pattern_year, line)
@@ -189,8 +204,10 @@ def write_CH4():
                         data[int(this_year)] = float(this_ppb)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
+        outfile = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
         json.dump(data, outfile)
+
 
 def write_CFC11():
     data = {}
@@ -198,7 +215,8 @@ def write_CFC11():
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CFC11Data.txt')
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CFC11Data.txt')
         for line in fp:
             if not(re.match('#', line)):
                 if re.match(pattern_year, line):
@@ -207,10 +225,12 @@ def write_CFC11():
                     lineEdited = lineEdited[7:]
                     match_ppt1 = re.match(pattern_ppt1, lineEdited)
                     if (str(match_ppt1.group(0)) != 'nan'):
-                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                        lineEdited = lineEdited.replace(
+                            str(match_ppt1.group(0)), '')
                         match_ppt2 = re.match(pattern_ppt2, lineEdited)
                         this_year = str(match_year.group(0))
-                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                        this_ppt = str(match_ppt1.group(0)) + \
+                            str(match_ppt2.group(0))
                         counter = 1
                         while counter <= 12:
                             try:
@@ -221,9 +241,11 @@ def write_CFC11():
                                 data[this_year] = float(this_ppt)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
+        outfile = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
+
 
 def write_CFC12():
     data = {}
@@ -231,7 +253,8 @@ def write_CFC12():
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CFC12Data.txt')
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CFC12Data.txt')
         for line in fp:
             if not(re.match('#', line)):
                 if re.match(pattern_year, line):
@@ -240,10 +263,12 @@ def write_CFC12():
                     lineEdited = lineEdited[7:]
                     match_ppt1 = re.match(pattern_ppt1, lineEdited)
                     if (str(match_ppt1.group(0)) != 'nan'):
-                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                        lineEdited = lineEdited.replace(
+                            str(match_ppt1.group(0)), '')
                         match_ppt2 = re.match(pattern_ppt2, lineEdited)
                         this_year = str(match_year.group(0))
-                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                        this_ppt = str(match_ppt1.group(0)) + \
+                            str(match_ppt2.group(0))
                         counter = 1
                         while counter <= 12:
                             try:
@@ -254,16 +279,19 @@ def write_CFC12():
                                 data[this_year] = float(this_ppt)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
+        outfile = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
+
 
 def write_Temperature():
     data = {}
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/TemperatureData.txt')
+        fp = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/TemperatureData.txt')
         for line in fp:
             match_year = re.search(pattern_year, line)
             match_temp = re.search(pattern_temp, line)
@@ -274,5 +302,6 @@ def write_Temperature():
                     data[int(this_year)] = float(this_temp)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
+        outfile = open(
+            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
         json.dump(data, outfile)
