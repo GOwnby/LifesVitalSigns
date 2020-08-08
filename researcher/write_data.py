@@ -39,7 +39,8 @@ def findStartYear(dataset):
 
 
 def findEndYear(dataset):
-    thisDataset = ''
+    
+	thisDataset = ''
     if dataset == 'CO2':
         thisDataset = 'CO2Data.json'
     if dataset == 'N2O':
@@ -54,7 +55,7 @@ def findEndYear(dataset):
         thisDataset = 'TemperatureData.json'
 
     with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
-        data = json.load(json_file)
+		data = json.load(json_file)
 
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     countLines = 0
