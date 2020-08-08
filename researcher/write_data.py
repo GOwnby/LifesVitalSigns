@@ -10,6 +10,7 @@ def write_All():
     write_CFC12()
     write_Temperature()
 
+
 def findStartYear(dataset):
     thisDataset = ''
     if dataset == 'CO2':
@@ -33,7 +34,6 @@ def findStartYear(dataset):
                 match_year = re.match(pattern_year, line)
                 if match_year is not None:
                     return match_year
-
 
 
 def findCommonStartYear():
@@ -97,6 +97,7 @@ def findEndYear(dataset):
                 if match_year is not None:
                     return match_year
                 
+
 def findCommonEndYear():
     endYearDataCO2 = findEndYear('CO2')
     endYearDataN2O = findEndYear('N2O')
@@ -141,6 +142,7 @@ def write_CO2():
         outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
         json.dump(data, outfile)
 
+
 def write_N2O():
     data = {}
     pattern_year = r'[0-9][0-9][0-9][0-9]'
@@ -174,6 +176,7 @@ def write_N2O():
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
 
+
 def write_CH4():
     data = {}
     pattern_year = r'[0-9][0-9][0-9][0-9]'
@@ -193,6 +196,7 @@ def write_CH4():
         fp.close()
         outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
         json.dump(data, outfile)
+
 
 def write_CFC11():
     data = {}
@@ -227,6 +231,7 @@ def write_CFC11():
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
 
+
 def write_CFC12():
     data = {}
     pattern_year = r'[0-9][0-9][0-9][0-9]'
@@ -259,6 +264,7 @@ def write_CFC12():
         outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
+
 
 def write_Temperature():
     data = {}
