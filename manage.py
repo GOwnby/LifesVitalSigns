@@ -3,7 +3,7 @@
 import os
 import sys
 
-from researcher.write_data import write_All
+from researcher.write_data_final import write_All
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LifesVitalSigns.settings')

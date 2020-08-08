@@ -39,7 +39,6 @@ def findStartYear(dataset):
 
 
 def findEndYear(dataset):
-    
     thisDataset = ''
     if dataset == 'CO2':
         thisDataset = 'CO2Data.json'
