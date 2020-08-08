@@ -129,17 +129,17 @@ def rateOfChange_dataset(dataset):
 # Atmospheric projections are then used to model Earth's Temperature using a relationship defined by the IPCC
 def basicProjection(dataset):
     thisDataset = ''
-    if dataset = 'CO2':
+    if dataset == 'CO2':
         thisDataset = 'CO2Data'
-    else if dataset = 'N2O':
+    else if dataset == 'N2O':
         thisDataset = 'N2OData'
-    else if dataset = 'CH4':
+    else if dataset == 'CH4':
         thisDataset = 'CH4Data'
-    else if dataset = 'CFC11':
+    else if dataset == 'CFC11':
         thisDataset = 'CFC11Data'
-    else if dataset = 'CFC12':
+    else if dataset == 'CFC12':
         thisDataset = 'CFC12Data'
-    else if dataset = 'Temperature':
+    else if dataset == 'Temperature':
         thisDataset = 'TemperatureData'
 
     projectedSet = {}

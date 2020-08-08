@@ -12,17 +12,17 @@ def write_All():
 
 def findStartYear(dataset):
     thisDataset = ''
-    if dataset = 'CO2':
+    if dataset == 'CO2':
         thisDataset = 'CO2Data.json'
-    else if dataset = 'N2O':
+    else if dataset == 'N2O':
         thisDataset = 'N2OData.json'
-    else if dataset = 'CH4':
+    else if dataset == 'CH4':
         thisDataset = 'CH4Data.json'
-    else if dataset = 'CFC11':
+    else if dataset == 'CFC11':
         thisDataset = 'CFC11Data.json'
-    else if dataset = 'CFC12':
+    else if dataset == 'CFC12':
         thisDataset = 'CFC12Data.json'
-    else if dataset = 'Temperature':
+    else if dataset == 'Temperature':
         thisDataset = 'TemperatureData.json'
 
     pattern_year = r'[0-9][0-9][0-9][0-9]'
@@ -58,17 +58,17 @@ def findCommonStartYear():
 
 def findEndYear(dataset):
     thisDataset = ''
-    if dataset = 'CO2':
+    if dataset == 'CO2':
         thisDataset = 'CO2Data.json'
-    else if dataset = 'N2O':
+    else if dataset == 'N2O':
         thisDataset = 'N2OData.json'
-    else if dataset = 'CH4':
+    else if dataset == 'CH4':
         thisDataset = 'CH4Data.json'
-    else if dataset = 'CFC11':
+    else if dataset == 'CFC11':
         thisDataset = 'CFC11Data.json'
-    else if dataset = 'CFC12':
+    else if dataset == 'CFC12':
         thisDataset = 'CFC12Data.json'
-    else if dataset = 'Temperature':
+    else if dataset == 'Temperature':
         thisDataset = 'TemperatureData.json'
 
     with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
