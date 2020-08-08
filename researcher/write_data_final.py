@@ -1,6 +1,6 @@
 import json
 import re
-from this import learn_data
+from . import learn_data
 
 
 
