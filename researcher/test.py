@@ -272,6 +272,7 @@ def findStartYear(dataset):
     match_year = ''
 
     try:
+
         fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
 
         for line in fp:
@@ -279,13 +280,3 @@ def findStartYear(dataset):
             if not(re.search('#', line)):
                 match_year = re.match(pattern_year, line)
                 return match_year
-    except KeyError:
-        return match_year
-
-def writeAll():
-    write_CO2()
-    write_N2O()
-    write_CH4()
-    write_CFC11()
-    write_CFC12()
-    write_Temperature()
