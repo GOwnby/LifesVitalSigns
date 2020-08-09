@@ -1,6 +1,5 @@
 import json
 import datetime
-import write_data_final
 
 def currentYear():
     return datetime.datetime.now().year
@@ -38,20 +37,22 @@ def average_dataset(dataset):
         currentYear = currentYear()
         while beginYear <= currentYear:
             currentSet = {}
-            month = 1
+            month = 0
+            countMonth = 0
+            eachMonth = 0
+            sum = 0.0
             while month <= 12:
+                month +=  1
                 try:
                     entry = data[(str(beginYear) + '_' + str(month))]
                     currentSet[month] = entry
-                month = month + 1
-            countMonth = 1
-            sum = 0.0
+                except KeyError:
+                    currentSet[month] = 0.0
             while countMonth <= 12:
+                countMonth += 1
                 sum = sum + currentSet[countMonth]
-                countMonth = countMonth + 1
-            countMonth = 0
             for each in currentSet:
-                countMonth = countMonth + 1
+                eachMonth += 1
             average = sum / float(countMonth)
             newData[beginYear] = average
             beginYear = beginYear + 1
@@ -157,7 +158,7 @@ def basicProjection(dataset):
                 startLoad = data[currentYear + counter]
                 startLoad = str(startLoad)
                 startYear = currentYear + counter
-            except:
+            except KeyError:
                 counter = counter - 1
 
         startLoad = float(startLoad)
@@ -220,7 +221,7 @@ def calculateChangeInRadiativeFlux(searchYear):
             initialCFC12PPT = data[searchYear - 1]
             changeDueToCFC12 = (0.32) * (finalCFC12PPT - initialCFC12PPT)
 
-    else if searchYear > thisYear:
+    if searchYear > thisYear:
 
         with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2DataBasicProjection.json') as json_file:
             data = json.load(json_file)
@@ -259,7 +260,7 @@ def calculateChangeInRadiativeFlux(searchYear):
             initialCFC12PPT = data[searchYear - 1]
             changeDueToCFC12 = (0.32) * (finalCFC12PPT - initialCFC12PPT)
     
-    else if searchYear == thisYear:
+    if searchYear == thisYear:
 
         with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2DataBasicProjection.json') as json_file:
             data = json.load(json_file)
