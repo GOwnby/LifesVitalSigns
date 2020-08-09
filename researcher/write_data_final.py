@@ -2,7 +2,7 @@ import json
 import re
 from . import learn_data
 
-
+fp = ''
 
 def findEndYear(dataset):
     thisDataset = ''
@@ -18,9 +18,6 @@ def findEndYear(dataset):
         thisDataset = 'CFC12Data.json'
     if dataset == 'Temperature':
         thisDataset = 'TemperatureData.json'
-
-    with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
-        data = json.load(json_file)
 
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     countLines = 0
@@ -181,12 +178,12 @@ def write_CFC11():
                         this_year = str(match_year.group(0))
                         this_ppt = str(match_ppt1.group(0)) + \
                             str(match_ppt2.group(0))
-                        counter = 1
+                        counter = 0
                         while counter <= 12:
+                            counter += 1
                             try:
                                 this_year = this_year + '_' + str(counter)
                                 testError = data[this_year]
-                                counter = counter + 1
                             except KeyError:
                                 data[this_year] = float(this_ppt)
     finally:
