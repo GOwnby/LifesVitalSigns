@@ -1,8 +1,11 @@
 import json
 import datetime
+import math
 
 def currentYear():
-    return datetime.datetime.now().year
+    global currentYear
+    currentYear = datetime.datetime.now().year
+    return currentYear
 
 def learn_all():
     average_dataset('N2O')
@@ -34,13 +37,11 @@ def average_dataset(dataset):
         data = json.load(json_file)
         newData = {}
         beginYear = 1977
-        currentYear = currentYear()
         while beginYear <= currentYear:
             currentSet = {}
             month = 0
             countMonth = 0
-            eachMonth = 0
-            sum = 0.0
+            thisSum = 0.0
             while month <= 12:
                 month +=  1
                 try:
@@ -50,10 +51,8 @@ def average_dataset(dataset):
                     currentSet[month] = 0.0
             while countMonth <= 12:
                 countMonth += 1
-                sum = sum + currentSet[countMonth]
-            for each in currentSet:
-                eachMonth += 1
-            average = sum / float(countMonth)
+                thisSum = thisSum + currentSet[countMonth]
+            average = thisSum / float(countMonth)
             newData[beginYear] = average
             beginYear = beginYear + 1
     outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset, 'w')
@@ -144,9 +143,8 @@ def basicProjection(dataset):
         thisDataset = 'TemperatureData'
 
     projectedSet = {}
-    currentYear = currentYear()
-    startYear = currentYear()
-    endYear = currentYear() + 100
+    startYear = currentYear
+    endYear = currentYear + 100
 
     with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + '.json') as json_file:
         data = json.load(json_file)
@@ -313,6 +311,15 @@ def calculateChangeInRadiativeFlux(searchYear):
 
     changeInRadiativeFlux = changeDueToCO2 + changeDueToN2O + changeDueToCH4 + changeDueToCFC11 + changeDueToCFC12
     return changeInRadiativeFlux
+
+def calculateFluxCO2(searchYear, thisYear):
+
+def calculateFluxN2O_CH4(searchYear, thisYear):
+
+def calculateFluxCFC11(searchYear, thisYear):
+
+def calculcateFluxCFC12(searchYear, thisYear):
+
 
 def functionInterdependence(CH4PPB, N2OPBB):
     return ( (0.47) * math.log(1 + ( ( (2.01) * ( (10) ** (-5) ) ) * ( ( (CH4PPB) * (N2OPBB) ) ** (0.75) ) ) +
