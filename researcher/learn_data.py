@@ -177,6 +177,7 @@ Calculates the Radiative Forcing or Flux using the relationship defined by the N
 
 https://www.esrl.noaa.gov/gmd/aggi/aggi.html
 '''
+
 def calculateChangeInRadiativeFlux(searchYear):
     thisYear = currentYear()
 
@@ -312,15 +313,6 @@ def calculateChangeInRadiativeFlux(searchYear):
     changeInRadiativeFlux = changeDueToCO2 + changeDueToN2O + changeDueToCH4 + changeDueToCFC11 + changeDueToCFC12
     return changeInRadiativeFlux
 
-def calculateFluxCO2(searchYear, thisYear):
-
-def calculateFluxN2O_CH4(searchYear, thisYear):
-
-def calculateFluxCFC11(searchYear, thisYear):
-
-def calculcateFluxCFC12(searchYear, thisYear):
-
-
 def functionInterdependence(CH4PPB, N2OPBB):
     return ( (0.47) * math.log(1 + ( ( (2.01) * ( (10) ** (-5) ) ) * ( ( (CH4PPB) * (N2OPBB) ) ** (0.75) ) ) +
         ( ( (5.31) * ( (10) ** (-15) ) ) * (CH4PPB) * ( ( (CH4PPB) * (N2OPBB) ) ** (1.52) ) ) ) )
@@ -433,9 +425,3 @@ def projectTemperature():
     
     outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureProjection.json', 'w')
     json.dump(changesOfChangeInTemperature, outfile)
-
-        
-
-
-
-
