@@ -18,12 +18,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '723ksdf9*&23^#4231njjd$%^sdfi39')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lifesvitalsigns.herokuapp.com']
 
 
 # Application definition
@@ -33,6 +36,7 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'searchaccount.apps.SearchaccountConfig',
     'forum.apps.ForumConfig',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,20 +77,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'LifesVitalSigns.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'LVS001',
-        'USER': 'root',
-        'PASSWORD': 'VirgoMilkyWay76*',
-        'HOST': 'localhost',
-        'PORT': '3306'
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -121,24 +111,26 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'LifesVitalSigns', 'static', 'static_root')
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'LifesVitalSigns', 'static', 'static_dirs'),
-)
-
 # Heroku: Update database configuration from $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# The URL to use when referring to static files (where they will be served from)
+STATIC_URL = '/static/'
+
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# The URL to use when referring to static files (where they will be served from)
-STATIC_URL = '/static/'
+# Location for static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'lifesivitalsigns/static')
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
