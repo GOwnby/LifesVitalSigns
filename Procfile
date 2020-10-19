@@ -1,2 +1,3 @@
-web: gunicorn lifesvitalsigns.wsgi --log-file -
-web: python manage.py runserver 0.0.0.0:$PORT --noreload
+web:gunicorn lifesvitalsigns.wsgi --log-file -
+web:python manage.py runserver 0.0.0.0:$PORT --noreload
+port:process.env.PORT || 5000
