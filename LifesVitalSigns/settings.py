@@ -76,6 +76,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LifesVitalSigns.wsgi.application'
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "django_deploy",
+        "USER": "foo",
+        "PASSWORD": "bar",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
 
 
 # Password validation
@@ -112,8 +122,7 @@ USE_TZ = True
 
 
 # Heroku: Update database configuration from $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+DATABASES = { 'default' : dj_database_url.config()}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
