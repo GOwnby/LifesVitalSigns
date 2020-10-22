@@ -135,8 +135,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Location for static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'lifesivitalsigns/static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'lifesivitalsigns/static')]
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
