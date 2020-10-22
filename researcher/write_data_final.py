@@ -138,8 +138,6 @@ def function_write(data, fp, pattern_year, pattern_ppb1, pattern_ppb2):
 
 def write_CO2():
     data = {}
-    fp = ''
-    outfile = ''
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -156,13 +154,12 @@ def write_CO2():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
-    finally:
         json.dump(data, outfile)
+    except AttributeError:
+        print("Error retrieving file")
 
 def write_N2O():
     data = {}
-    fp = ''
-    outfile = ''
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
@@ -172,15 +169,14 @@ def write_N2O():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
-    finally:
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
+    except AttributeError:
+        print("Error retrieving file")
 
 
 def write_CH4():
     data = {}
-    fp = ''
-    outfile = ''
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -196,15 +192,14 @@ def write_CH4():
                         data[int(this_year)] = float(this_ppb)
 
         fp.close()
-        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
-    finally:        
+        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')       
         json.dump(data, outfile)
+    except AttributeError:
+        print("Error retrieving file")
 
 
 def write_CFC11():
     data = {}
-    fp = ''
-    outfile = ''
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -213,16 +208,15 @@ def write_CFC11():
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
 
         fp.close()
-        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
-    finally:        
+        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')      
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
+    except AttributeError:
+        print("Error retrieving file")
 
 
 def write_CFC12():
     data = {}
-    fp = ''
-    outfile = ''
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -231,16 +225,15 @@ def write_CFC12():
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
 
         fp.close()
-        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
-    finally:        
+        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')   
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
+    except AttributeError:
+        print("Error retrieving file")
 
 
 def write_Temperature():
     data = {}
-    fp = ''
-    outfile = ''
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
@@ -255,9 +248,10 @@ def write_Temperature():
                     data[int(this_year)] = float(this_temp)
 
         fp.close()
-        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
-    finally:        
+        outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')      
         json.dump(data, outfile)
+    except AttributeError:
+        print("Error retrieving file")
 
 def writeAll():
     write_CO2()
