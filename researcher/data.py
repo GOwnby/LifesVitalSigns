@@ -43,6 +43,8 @@ def retrieve_Temperature():
     write_data_final.write_Temperature()
 
 def retrieve_All():
+    if not os.path.exists('data'):
+        os.makedirs('data')
     retrieve_CO2()
     retrieve_N2O()
     retrieve_CH4()
