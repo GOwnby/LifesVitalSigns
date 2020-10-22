@@ -155,6 +155,7 @@ def write_CO2():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
+    finally:
         json.dump(data, outfile)
 
 def write_N2O():
@@ -169,6 +170,7 @@ def write_N2O():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
+    finally:
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
 
@@ -192,6 +194,7 @@ def write_CH4():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
+    finally:        
         json.dump(data, outfile)
 
 
@@ -207,6 +210,7 @@ def write_CFC11():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
+    finally:        
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
 
@@ -223,6 +227,7 @@ def write_CFC12():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
+    finally:        
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
 
@@ -245,6 +250,7 @@ def write_Temperature():
 
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
+    finally:        
         json.dump(data, outfile)
 
 def writeAll():
