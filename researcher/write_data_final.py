@@ -2,9 +2,10 @@ import os
 import json
 import re
 from . import learn_data
+from django.apps import apps
 
 def root():
-    root = os.path.abspath(os.path.join(".", os.pardir))
+    root = apps.get_app_config('LifesVitalSigns').path
     return root
 
 def findStartYear(dataset):
@@ -27,7 +28,7 @@ def findStartYear(dataset):
     match_year = ''
 
     try:
-        fp = open(rootPath + '/researcher/data/' + thisDataset)
+        fp = open('data/' + thisDataset)
         for line in fp:
             if not(re.search('#', line)):
                 match_year = re.match(pattern_year, line)
@@ -54,12 +55,12 @@ def findEndYear(dataset):
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     countLines = 0
     try:
-        fp = open(rootPath + '/researcher/data/' + thisDataset)
+        fp = open('data/' + thisDataset)
         for line in fp:
             countLines += 1
     finally:
         thisLine = 0
-        fp = open(rootPath + '/researcher/data/' + thisDataset)
+        fp = open('data/' + thisDataset)
         for line in fp:
             thisLine += 1
             if thisLine == (countLines - 1):
@@ -153,7 +154,7 @@ def write_CO2():
                         data[int(this_year)] = float(this_ppm)
 
         fp.close()
-        outfile = open(rootPath + 'LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
+        outfile = open(rootPath + 'static/static_dirs/js/json/CO2Data.json', 'w')
         json.dump(data, outfile)
     except AttributeError:
         print("Error retrieving file")
@@ -169,7 +170,7 @@ def write_N2O():
         function_write(data,fp,pattern_year,pattern_ppb1,pattern_ppb2)
 
         fp.close()
-        outfile = open(rootPath + 'LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
+        outfile = open(rootPath + 'static/static_dirs/js/json/N2OData.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
     except AttributeError:
@@ -194,7 +195,7 @@ def write_CH4():
                         data[int(this_year)] = float(this_ppb)
 
         fp.close()
-        outfile = open(rootPath + 'LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')       
+        outfile = open(rootPath + 'static/static_dirs/js/json/CH4Data.json', 'w')       
         json.dump(data, outfile)
     except AttributeError:
         print("Error retrieving file")
@@ -211,7 +212,7 @@ def write_CFC11():
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
 
         fp.close()
-        outfile = open(rootPath + 'LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')      
+        outfile = open(rootPath + 'static/static_dirs/js/json/CFC11Data.json', 'w')      
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
     except AttributeError:
@@ -229,7 +230,7 @@ def write_CFC12():
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
 
         fp.close()
-        outfile = open(rootPath + 'LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')   
+        outfile = open(rootPath + 'static/static_dirs/js/json/CFC12Data.json', 'w')   
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
     except AttributeError:
@@ -253,7 +254,7 @@ def write_Temperature():
                     data[int(this_year)] = float(this_temp)
 
         fp.close()
-        outfile = open(rootPath + 'LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')      
+        outfile = open(rootPath + 'static/static_dirs/js/json/TemperatureData.json', 'w')      
         json.dump(data, outfile)
     except AttributeError:
         print("Error retrieving file")
