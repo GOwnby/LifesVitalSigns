@@ -2,10 +2,9 @@ import urllib.request
 import os
 from . import write_data
 
-def rootPath():
-    global rootPath
-    rootPath = os.path.abspath(os.path.join(".", os.pardir))
-    return rootPath
+def root():
+    root = os.path.abspath(os.path.join(".", os.pardir))
+    return root
 
 def retrieve_CO2():
     url = 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_annmean_mlo.txt'
@@ -38,6 +37,7 @@ def retrieve_Temperature():
     write_data.write_Temperature()
 
 def retrieve_All():
+    global rootPath = root()
     retrieve_CO2()
     retrieve_N2O()
     retrieve_CH4()
