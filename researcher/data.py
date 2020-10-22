@@ -2,9 +2,6 @@ import urllib.request
 import os
 from . import write_data_final
 
-def root():
-    root = os.path.abspath(os.path.join(".", os.pardir))
-    return root
 
 def retrieve_CO2():
     url = 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_annmean_mlo.txt'
