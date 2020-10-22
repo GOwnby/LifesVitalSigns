@@ -258,7 +258,7 @@ def write_Temperature():
     except AttributeError:
         print("Error retrieving file")
 
-def writeAll():
+def write_All():
     write_CO2()
     write_N2O()
     write_CH4()
