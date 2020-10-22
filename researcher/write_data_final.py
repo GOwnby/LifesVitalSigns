@@ -253,7 +253,8 @@ def write_Temperature():
         print("Error retrieving file")
 
 def writeAll():
-    global rootPath = root()
+    global rootPath
+    rootPath = root()
     write_CO2()
     write_N2O()
     write_CH4()

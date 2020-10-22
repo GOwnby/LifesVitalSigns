@@ -37,7 +37,8 @@ def retrieve_Temperature():
     write_data.write_Temperature()
 
 def retrieve_All():
-    global rootPath = root()
+    global rootPath
+    rootPath = root()
     retrieve_CO2()
     retrieve_N2O()
     retrieve_CH4()
