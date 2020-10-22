@@ -4,7 +4,6 @@ import re
 from . import learn_data
 
 def rootPath():
-    global rootPath
     rootPath = os.path.abspath(os.path.join(".", os.pardir))
     return rootPath
 
@@ -138,7 +137,7 @@ def function_write(data, fp, pattern_year, pattern_ppb1, pattern_ppb2):
 
 def write_CO2():
     data = {}
-    fp = ''
+    rootPath = rootPath()
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -161,7 +160,7 @@ def write_CO2():
 
 def write_N2O():
     data = {}
-    fp = ''
+    rootPath = rootPath()
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
@@ -179,7 +178,7 @@ def write_N2O():
 
 def write_CH4():
     data = {}
-    fp = ''
+    rootPath = rootPath()
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -203,7 +202,7 @@ def write_CH4():
 
 def write_CFC11():
     data = {}
-    fp = ''
+    rootPath = rootPath()
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -221,7 +220,7 @@ def write_CFC11():
 
 def write_CFC12():
     data = {}
-    fp = ''
+    rootPath = rootPath()
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -239,7 +238,7 @@ def write_CFC12():
 
 def write_Temperature():
     data = {}
-    fp = ''
+    rootPath = rootPath()
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
