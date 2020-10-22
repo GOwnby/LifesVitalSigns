@@ -3,7 +3,6 @@
 import os
 import sys
 
-from researcher.write_data_final import write_All
 from researcher.data import retrieve_All
 from django.core.management import execute_from_command_line
 
@@ -12,7 +11,7 @@ def main():
     execute_from_command_line(sys.argv)
 
     retrieve_All()
-    write_All()
+
 
 if __name__ == '__main__':
     main()
