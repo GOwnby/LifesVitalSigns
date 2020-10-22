@@ -152,7 +152,7 @@ def write_CO2():
                         this_year = match_year.group(0)
                         this_ppm = match_ppm.group(0)
                         data[int(this_year)] = float(this_ppm)
-    finally:
+
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
         json.dump(data, outfile)
@@ -166,7 +166,7 @@ def write_N2O():
     try:
         fp = open(rootPath + '/researcher/data/N2OData.txt')
         function_write(data,fp,pattern_year,pattern_ppb1,pattern_ppb2)
-    finally:
+
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
         json.dump(data, outfile)
@@ -189,7 +189,7 @@ def write_CH4():
                         this_year = match_year.group(0)
                         this_ppb = match_ppb.group(0)
                         data[int(this_year)] = float(this_ppb)
-    finally:
+
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
         json.dump(data, outfile)
@@ -204,7 +204,7 @@ def write_CFC11():
     try:
         fp = open(rootPath + '/researcher/data/CFC11Data.txt')
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
-    finally:
+
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
         json.dump(data, outfile)
@@ -220,7 +220,7 @@ def write_CFC12():
     try:
         fp = open(rootPath + '/researcher/data/CFC12Data.txt')
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
-    finally:
+
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
         json.dump(data, outfile)
@@ -242,7 +242,7 @@ def write_Temperature():
                     this_year = match_year.group(0)
                     this_temp = match_temp.group(0)
                     data[int(this_year)] = float(this_temp)
-    finally:
+
         fp.close()
         outfile = open(rootPath + '/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
         json.dump(data, outfile)
