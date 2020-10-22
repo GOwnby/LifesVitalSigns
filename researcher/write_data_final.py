@@ -149,7 +149,7 @@ def write_CO2():
                         data[int(this_year)] = float(this_ppm)
 
         fp.close()
-        outfile = open(PROJECT_ROOT + 'LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
+        outfile = open(PROJECT_ROOT + '/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
         json.dump(data, outfile)
     except AttributeError:
         print("Error retrieving file")
@@ -164,7 +164,7 @@ def write_N2O():
         function_write(data,fp,pattern_year,pattern_ppb1,pattern_ppb2)
 
         fp.close()
-        outfile = open(PROJECT_ROOT + 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
+        outfile = open(PROJECT_ROOT + '/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
     except AttributeError:
@@ -188,7 +188,7 @@ def write_CH4():
                         data[int(this_year)] = float(this_ppb)
 
         fp.close()
-        outfile = open(PROJECT_ROOT+ 'LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')       
+        outfile = open(PROJECT_ROOT+ '/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')       
         json.dump(data, outfile)
     except AttributeError:
         print("Error retrieving file")
@@ -204,7 +204,7 @@ def write_CFC11():
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
 
         fp.close()
-        outfile = open(PROJECT_ROOT + 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')      
+        outfile = open(PROJECT_ROOT + '/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')      
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
     except AttributeError:
@@ -221,7 +221,7 @@ def write_CFC12():
         function_write(data,fp,pattern_year,pattern_ppt1,pattern_ppt2)
 
         fp.close()
-        outfile = open(PROJECT_ROOT + 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')   
+        outfile = open(PROJECT_ROOT + '/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')   
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
     except AttributeError:
@@ -244,7 +244,7 @@ def write_Temperature():
                     data[int(this_year)] = float(this_temp)
 
         fp.close()
-        outfile = open(PROJECT_ROOT + 'LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')      
+        outfile = open(PROJECT_ROOT + '/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')      
         json.dump(data, outfile)
     except AttributeError:
         print("Error retrieving file")
