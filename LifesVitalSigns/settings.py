@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Location for static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'lifesvitalsigns/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'LifesVitalSigns/static')]
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
