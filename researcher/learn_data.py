@@ -3,7 +3,6 @@ import datetime
 import math
 
 def currentYear():
-    global currentYear
     currentYear = datetime.datetime.now().year
     return currentYear
 
@@ -25,6 +24,7 @@ def learn_all():
 
 
 def average_dataset(dataset):
+    thisYear = currentYear()
     thisDataset = ''
     if dataset == 'N2O':
         thisDataset = 'N2OData.json'
@@ -37,7 +37,7 @@ def average_dataset(dataset):
         data = json.load(json_file)
         newData = {}
         beginYear = 1977
-        while beginYear <= currentYear:
+        while beginYear <= thisYear:
             currentSet = {}
             month = 0
             countMonth = 0
@@ -57,6 +57,9 @@ def average_dataset(dataset):
             beginYear = beginYear + 1
     outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset, 'w')
     json.dump(newData, outfile)
+    outfile.close()
+    data = None
+    newData = None
 
 # Unused Calculations, most recent rate of change is used to project future atmospheric composition as opposed to average rate of change
 # to reflect changing energy consumption and pollution within this era
@@ -143,7 +146,8 @@ def basicProjection(dataset):
         thisDataset = 'TemperatureData'
 
     projectedSet = {}
-    startYear = currentYear
+    startYear = currentYear()
+    thisYear = currentYear()
     endYear = currentYear + 100
 
     with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + '.json') as json_file:
@@ -153,23 +157,25 @@ def basicProjection(dataset):
         counter = 0
         while len(startLoad) < 2:
             try:
-                startLoad = data[currentYear + counter]
+                startLoad = data[thisYear + counter]
                 startLoad = str(startLoad)
-                startYear = currentYear + counter
+                startYear = thisYear + counter
             except KeyError:
                 counter = counter - 1
 
         startLoad = float(startLoad)
-        precedingLoad = float(data[(currentYear + counter) - 1])
+        precedingLoad = float(data[(startYear) - 1])
         changeInLoad = startLoad - precedingLoad
-        projectedSet[currentYear] = startLoad + changeInLoad
-        currentYear += 1
-        while currentYear <= endYear:
-            projectedSet[currentYear] = projectedSet[currentYear - 1] + changeInLoad
-            currentYear += 1
+        projectedSet[startYear + 1] = startLoad + changeInLoad
+        startYear += 2
+        while startYear <= endYear:
+            projectedSet[startYear] = projectedSet[startYear - 1] + changeInLoad
+            startYear += 1
 
     outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + 'BasicProjection.json', 'w')
     json.dump(projectedSet, outfile)
+    outfile.close()
+    data = None
 
 
 '''

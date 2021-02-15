@@ -1,0 +1,81 @@
+body {
+    margin: 0px;
+}
+
+#page {
+    width: 100%;
+    height: 100%;
+}
+
+img{
+    max-width: 100%;
+}
+
+#content-holder {
+    margin-top: 333px;
+    width: 90%;
+    height: 75%;
+    background-color: red;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    clip-path: polygon(
+        0 10%,
+        10% 0,
+        90% 0,
+        100% 10%, 
+        100% 90%,
+        90% 100%,
+        10% 100%,
+        0% 90%,
+        0% 10%
+    );
+}
+
+#content-selectors {
+    width: 100%;
+    height: 25%;
+    position: top;
+    background: radial-gradient(circle, #00276b, #02519e);
+}
+
+#selector1 {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+#selector2 {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+#selector3 {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+#selector4 {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+#selector5 {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+#content {
+    width: 100%;
+    height: 75%;
+    position: bottom;
+    background-color: black;
+}
