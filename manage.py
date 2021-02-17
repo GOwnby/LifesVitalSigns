@@ -58,17 +58,17 @@ def main():
                 FILES_UPDATED = False
                 print('Files failed to update.')
 
+    JSON_UPDATED = False
     if JSON_LAST_UPDATED == '00-00=0000':
         write_All()
+        JSON_UPDATED = True
 
-    JSON_UPDATED = False
     if FILES_UPDATED:
-        try:
-            update_All()
-            JSON_UPDATED = True
-        except Exception:
-            JSON_UPDATED = False
-            print('JSON failed to update.')
+        if !(JSON_UPDATED):
+            try:
+                update_All()
+            except Exception:
+                print('JSON failed to update.')
 
     if FILES_UPDATED:
         if JSON_UPDATED:
