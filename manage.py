@@ -10,7 +10,7 @@ from django.core.management import execute_from_command_line
 import logger
 import datetime
 
-# First Server Start-up - Log.txt must be zeroed out, Replace date integers with 0
+# First Server Start-up - Log.txt must be zeroed out, Replace date integers with 0 "00-00=0000"
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LifesVitalSigns.settings')
     execute_from_command_line(sys.argv)
@@ -58,13 +58,12 @@ def main():
                 FILES_UPDATED = False
                 print('Files failed to update.')
 
-    if JSON_LAST_UPDATED == '0-0=0000':
+    if JSON_LAST_UPDATED == '00-00=0000':
         write_All()
 
     JSON_UPDATED = False
     if FILES_UPDATED:
         try:
-            # Change and write new function update_All()
             update_All()
             JSON_UPDATED = True
         except Exception:
