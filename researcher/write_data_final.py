@@ -410,11 +410,11 @@ def update_CFC12():
         for line in fp:
             linesInData = int(line)
         fp = open('data/CFC12Data.txt')
-        dataObject = updatedFile = itertools.islice(fp, linesInData)
-        linesInData = dataObject[1]
+        updatedFile = itertools.islice(fp, linesInData)
         fp.close()
         
-        function_write(data, updatedFile, patterns, linesInData)
+        dataObject = function_write(data, updatedFile, patterns, linesInData)
+        linesInData = dataObject[1]
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
