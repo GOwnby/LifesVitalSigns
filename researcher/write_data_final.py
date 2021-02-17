@@ -129,6 +129,8 @@ def function_write(data, fp, patterns, linesInData):
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppb)
                         counter =+ 1
+    dataObject = [data, linesInData]
+    return dataObject
     
 
 def write_CO2():
@@ -205,13 +207,14 @@ def write_N2O():
     try:
         fp = open('data/N2OData.txt')
         linesInData = 0
-        function_write(data, fp, patterns, linesInData)
+        dataObject = function_write(data, fp, patterns, linesInData)
+        linesInData = dataObject[1]
         fp.close()
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
         outfile = open(filePath, 'w')
-        json.dump(data, outfile)
+        json.dump(dataObject[0], outfile)
         learn_data.average_dataset('N2O')
         data = None
         outfile = open('data/N2ODataLines.txt', 'w')
@@ -234,12 +237,13 @@ def update_N2O():
         fp = open('data/N2OData.txt')
         updatedFile = itertools.islice(fp, linesInData)
         fp.close()
-        function_write(data, updatedFile, patterns, linesInData)
+        dataObject = function_write(data, updatedFile, patterns, linesInData)
+        linesInData = dataObject[1]
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
         outfile = open(filePath, 'a')
-        json.dump(data, outfile)
+        json.dump(dataObject[0], outfile)
         data = None
         updatedFile = None
         outfile = open('data/N2ODataLines.txt', 'w')
@@ -323,13 +327,14 @@ def write_CFC11():
     try:
         fp = open('data/CFC11Data.txt')
         linesInData = 0
-        function_write(data, fp, patterns, linesInData)
+        dataObject = function_write(data, fp, patterns, linesInData)
+        linesInData = dataObject[1]
         fp.close()
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
         outfile = open(filePath, 'w')   
-        json.dump(data, outfile)
+        json.dump(dataObject[0], outfile)
         learn_data.average_dataset('CFC11')
         data = None
         outfile = open('data/CFC11DataLines.txt', 'w')
@@ -353,12 +358,13 @@ def update_CFC11():
         updatedFile = itertools.islice(fp, linesInData)
         fp.close()
         
-        function_write(data, updatedFile, patterns, linesInData)
+        dataObject = function_write(data, updatedFile, patterns, linesInData)
+        linesInData = dataObject[1]
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
         outfile = open(filePath, 'a')
-        json.dump(data, outfile)
+        json.dump(dataObject[0], outfile)
         data = None
         updatedFile = None
         outfile = open('data/CFC11DataLines.txt', 'w')
@@ -377,13 +383,14 @@ def write_CFC12():
     try:
         fp = open('data/CFC12Data.txt')
         linesInData = 0
-        function_write(data, fp, patterns, linesInData)
+        dataObject = function_write(data, fp, patterns, linesInData)
+        linesInData = dataObject[1]
         fp.close()
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
         outfile = open(filePath, 'w')  
-        json.dump(data, outfile)
+        json.dump(dataObject[0], outfile)
         learn_data.average_dataset('CFC12')
         data = None
         outfile = open('data/CFC11DataLines.txt', 'w')
@@ -403,7 +410,8 @@ def update_CFC12():
         for line in fp:
             linesInData = int(line)
         fp = open('data/CFC12Data.txt')
-        updatedFile = itertools.islice(fp, linesInData)
+        dataObject = updatedFile = itertools.islice(fp, linesInData)
+        linesInData = dataObject[1]
         fp.close()
         
         function_write(data, updatedFile, patterns, linesInData)
@@ -411,7 +419,7 @@ def update_CFC12():
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
         outfile = open(filePath, 'a')
-        json.dump(data, outfile)
+        json.dump(dataObject[0], outfile)
         data = None
         updatedFile = None
         outfile = open('data/CFC12DataLines.txt', 'w')
