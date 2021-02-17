@@ -64,7 +64,7 @@ def main():
         JSON_UPDATED = True
 
     if FILES_UPDATED:
-        if !(JSON_UPDATED):
+        if not(JSON_UPDATED):
             try:
                 update_All()
             except Exception:
