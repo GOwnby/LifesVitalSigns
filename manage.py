@@ -12,7 +12,7 @@ import datetime
 
 # First Server Start-up - Log.txt must be zeroed out, Replace date integers with 0
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LifesVitalSigns.settings.local')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LifesVitalSigns.settings')
     execute_from_command_line(sys.argv)
 
     SERVER_LAST_STARTED = logger.read_status('SERVER_STARTED_TIMESTAMP')
