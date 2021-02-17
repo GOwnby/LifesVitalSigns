@@ -33,7 +33,10 @@ def average_dataset(dataset):
     if dataset == 'CFC12':
         thisDataset = 'CFC12Data.json'
 
-    with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/" + thisDataset))
+
+    with open(filePath) as json_file:
         data = json.load(json_file)
         newData = {}
         beginYear = 1977
@@ -55,7 +58,7 @@ def average_dataset(dataset):
             average = thisSum / float(countMonth)
             newData[beginYear] = average
             beginYear = beginYear + 1
-    outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset, 'w')
+    outfile = open(filePath, 'w')
     json.dump(newData, outfile)
     outfile.close()
     data = None
@@ -133,24 +136,27 @@ def rateOfChange_dataset(dataset):
 def basicProjection(dataset):
     thisDataset = ''
     if dataset == 'CO2':
-        thisDataset = 'CO2Data'
+        thisDataset = 'CO2Data.json'
     if dataset == 'N2O':
-        thisDataset = 'N2OData'
+        thisDataset = 'N2OData.json'
     if dataset == 'CH4':
-        thisDataset = 'CH4Data'
+        thisDataset = 'CH4Data.json'
     if dataset == 'CFC11':
-        thisDataset = 'CFC11Data'
+        thisDataset = 'CFC11Data.json'
     if dataset == 'CFC12':
-        thisDataset = 'CFC12Data'
+        thisDataset = 'CFC12Data.json'
     if dataset == 'Temperature':
-        thisDataset = 'TemperatureData'
+        thisDataset = 'TemperatureData/json'
 
     projectedSet = {}
     startYear = currentYear()
     thisYear = currentYear()
     endYear = currentYear + 100
 
-    with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + '.json') as json_file:
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/" + thisDataset))
+
+    with open(filePath) as json_file:
         data = json.load(json_file)
         
         startLoad = ""
@@ -186,17 +192,19 @@ https://www.esrl.noaa.gov/gmd/aggi/aggi.html
 
 def calculateChangeInRadiativeFlux(searchYear):
     thisYear = currentYear()
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/"))
 
     if searchYear < thisYear:
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json') as json_file:
+        with open(filePath + "CO2Data.json") as json_file:
             data = json.load(json_file)
 
             finalCO2PPM = data[searchYear]
             initialCO2PPM = data[searchYear - 1]
             changeDueToCO2 = (5.35) * math.log((finalCO2PPM / initialCO2PPM))
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2OData.json') as json_file:
+        with open(filePath + "N2OData.json") as json_file:
             data = json.load(json_file)
 
             finalN2OPPB = data[searchYear]
@@ -204,7 +212,7 @@ def calculateChangeInRadiativeFlux(searchYear):
             changeDueToN2O = ( (0.12) * ( (finalN2OPPB ** (0.5)) - (initialN2OPPB ** (0.5)) ) ) - ( functionInterdependence(initialCH4PPB,finalN2OPPB) -
                 functionInterdependence(initialCH4PPB,initialN2OPPB) )
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json') as json_file:
+        with open(filePath + "CH4Data.json") as json_file:
             data = json.load(json_file)
 
             finalCH4PPB = data[searchYear]
@@ -212,14 +220,14 @@ def calculateChangeInRadiativeFlux(searchYear):
             changeDueToCH4 = ( (0.036) * ( (finalCH4PPB ** (0.5)) - (initialCH4PPB ** (0.5)) ) ) - ( functionInterdependence(finalCH4PPB,initialN2OPPB) -
                 functionInterdependence(initialCH4PPB,initialN2OPPB) )
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json') as json_file:
+        with open(filePath + "CFC11Data.json") as json_file:
             data = json.load(json_file)
 
             finalCFC11PPT = data[searchYear]
             initialCFC11PPT = data[searchYear - 1]
             changeDueToCFC11 = (0.25) * (finalCFC11PPT - initialCFC11PPT)
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json') as json_file:
+        with open(filePath + "CFC12Data.json") as json_file:
             data = json.load(json_file)
 
             finalCFC12PPT = data[searchYear]
@@ -228,14 +236,14 @@ def calculateChangeInRadiativeFlux(searchYear):
 
     if searchYear > thisYear:
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2DataBasicProjection.json') as json_file:
+        with open(filePath + "CO2DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCO2PPM = data[searchYear]
             initialCO2PPM = data[searchYear - 1]
             changeDueToCO2 = (5.35) * math.log((finalCO2PPM / initialCO2PPM))
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2ODataBasicProjection.json') as json_file:
+        with open(filePath + "N2ODataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalN2OPPB = data[searchYear]
@@ -243,7 +251,7 @@ def calculateChangeInRadiativeFlux(searchYear):
             changeDueToN2O = ( (0.12) * ( (finalN2OPPB ** (0.5)) - (initialN2OPPB ** (0.5)) ) ) - ( functionInterdependence(initialCH4PPB,finalN2OPPB) -
                 functionInterdependence(initialCH4PPB,initialN2OPPB) )
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4DataBasicProjection.json') as json_file:
+        with open(filePath + "CH4DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCH4PPB = data[searchYear]
@@ -251,14 +259,14 @@ def calculateChangeInRadiativeFlux(searchYear):
             changeDueToCH4 = ( (0.036) * ( (finalCH4PPB ** (0.5)) - (initialCH4PPB ** (0.5)) ) ) - ( functionInterdependence(finalCH4PPB,initialN2OPPB) -
                 functionInterdependence(initialCH4PPB,initialN2OPPB) )
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11DataBasicProjection.json') as json_file:
+        with open(filePath + "CFC11DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCFC11PPT = data[searchYear]
             initialCFC11PPT = data[searchYear - 1]
             changeDueToCFC11 = (0.25) * (finalCFC11PPT - initialCFC11PPT)
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12DataBasicProjection.json') as json_file:
+        with open(filePath + "CFC12DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCFC12PPT = data[searchYear]
@@ -267,16 +275,16 @@ def calculateChangeInRadiativeFlux(searchYear):
     
     if searchYear == thisYear:
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2DataBasicProjection.json') as json_file:
+        with open(filePath + "CO2DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCO2PPM = data[searchYear]
-            with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json') as json_file:
+            with open(filePath + "CO2Data.json") as json_file:
                 data = json.load(json_file)
                 initialCO2PPM = data[searchYear - 1]
                 changeDueToCO2 = (5.35) * math.log((finalCO2PPM / initialCO2PPM))
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2ODataBasicProjection.json') as json_file:
+        with open(filePath + "N2ODataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalN2OPPB = data[searchYear]
@@ -286,30 +294,30 @@ def calculateChangeInRadiativeFlux(searchYear):
                 changeDueToN2O = ( (0.12) * ( (finalN2OPPB ** (0.5)) - (initialN2OPPB ** (0.5)) ) ) - ( functionInterdependence(initialCH4PPB,finalN2OPPB) -
                     functionInterdependence(initialCH4PPB,initialN2OPPB) )
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4DataBasicProjection.json') as json_file:
+        with open(filePath + "CH4DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCH4PPB = data[searchYear]
-            with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json') as json_file:
+            with open(filePath + "CH4Data.json") as json_file:
                 data = json.load(json_file)
                 initialCH4PPB = data[searchYear - 1]
                 changeDueToCH4 = ( (0.036) * ( (finalCH4PPB ** (0.5)) - (initialCH4PPB ** (0.5)) ) ) - ( functionInterdependence(finalCH4PPB,initialN2OPPB) -
                     functionInterdependence(initialCH4PPB,initialN2OPPB) )
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11DataBasicProjection.json') as json_file:
+        with open(filePath + "CFC11DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCFC11PPT = data[searchYear]
-            with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json') as json_file:
+            with open(filePath + "CFC11Data.json") as json_file:
                 data = json.load(json_file)
                 initialCFC11PPT = data[searchYear - 1]
                 changeDueToCFC11 = (0.25) * (finalCFC11PPT - initialCFC11PPT)
 
-        with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12DataBasicProjection.json') as json_file:
+        with open(filePath + "CFC12DataBasicProjection.json") as json_file:
             data = json.load(json_file)
 
             finalCFC12PPT = data[searchYear]
-            with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12DataBasicProjection.json') as json_file:
+            with open(filePath + "CFC12DataBasicProjection.json") as json_file:
                 data = json.load(json_file)
                 initialCFC12PPT = data[searchYear - 1]
                 changeDueToCFC12 = (0.32) * (finalCFC12PPT - initialCFC12PPT)
@@ -325,7 +333,7 @@ def functionInterdependence(CH4PPB, N2OPBB):
 
 
 def calculateChangeInTemperature(searchYear):
-    with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json') as json_file:
+    with open(filePath + "TemperatureData.json") as json_file:
         data = json.load(json_file)
 
         finalTemp = data[searchYear]
@@ -389,6 +397,8 @@ https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_Chapter08_FINAL.pdf
 # Changes in radiative flux are a function of projected changes in atmospheric composition
 # Changes in the Climate Sensitivity Parameter are a function of projected changes in radiatve flux and the rate of change of the rate of change of temperature
 def projectTemperature():
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/"))
     startYear = currentYear()
     nextCentury = startYear + 100
     changesOfChangeInTemperature = {}
@@ -429,5 +439,5 @@ def projectTemperature():
         startYear +=  1
         changesOfChangeInTemperature[startYear] = (changesOfClimateSensitivityParameter[startYear - 1]) * (calculateChangeInRadiativeFlux(startYear - 1))
     
-    outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureProjection.json', 'w')
+    outfile = open(filePath + "TemperatureProjection.json", "w")
     json.dump(changesOfChangeInTemperature, outfile)
