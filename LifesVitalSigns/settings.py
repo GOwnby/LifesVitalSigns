@@ -77,8 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'LVS',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'siteLVS',
+        'PASSWORD': 'secureLVS',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
