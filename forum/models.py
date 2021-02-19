@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 
+date = datetime.datetime.now()
+
 
 # A Life's Vital Signs Forum account
 class Account(models.Model):
@@ -21,26 +23,26 @@ class ClimateScienceEntry(models.Model):
     text = models.TextField(max_length=10000)
     entry = models.IntegerField(primary_key=True)
     posted_by = models.CharField(max_length=50, default='user')
-    posted_date = models.CharField(max_length=20, default=( str(datetime.datetime.now().month) + ', ' + str(datetime.datetime.now().day) + ', ' + str(datetime.datetime.now().year) ) )
+    posted_date = models.CharField(max_length=20, default=( str(date.month) + ', ' + str(date.day) + ', ' + str(date.year) ) )
 
 class EnvironmentalScienceEntry(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=10000)
     entry = models.IntegerField(primary_key=True)
     posted_by = models.CharField(max_length=50, default='user')
-    posted_date = models.CharField(max_length=20, default=( str(datetime.datetime.now().month) + ', ' + str(datetime.datetime.now().day) + ', ' + str(datetime.datetime.now().year) ) )
+    posted_date = models.CharField(max_length=20, default=( str(date.month) + ', ' + str(date.day) + ', ' + str(date.year) ) )
 
 class EcologyEntry(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=10000)
     entry = models.IntegerField(primary_key=True)
     posted_by = models.CharField(max_length=50, default='user')
-    posted_date = models.CharField(max_length=20, default=( str(datetime.datetime.now().month) + ', ' + str(datetime.datetime.now().day) + ', ' + str(datetime.datetime.now().year) ) )
+    posted_date = models.CharField(max_length=20, default=( str(date.month) + ', ' + str(date.day) + ', ' + str(date.year) ) )
 
 class TechnologyEntry(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=10000)
     entry = models.IntegerField(primary_key=True)
     posted_by = models.CharField(max_length=50, default='user')
-    posted_date = models.CharField(max_length=20, default=( str(datetime.datetime.now().month) + ', ' + str(datetime.datetime.now().day) + ', ' + str(datetime.datetime.now().year) ) )
+    posted_date = models.CharField(max_length=20, default=( str(date.month) + ', ' + str(date.day) + ', ' + str(date.year) ) )
     
