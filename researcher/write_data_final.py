@@ -208,14 +208,30 @@ def write_N2O():
     try:
         fp = open('data/N2OData.txt')
         linesInData = 0
-        dataObject = function_write(data, fp, patterns, linesInData)
-        linesInData = dataObject[1]
+        for line in fp:
+            linesInData += 1
+            if not(re.match('#', line)):                    
+                if re.match(patterns[0], line):
+                    match_year = re.match(patterns[0], line)
+                    lineEdited = line.replace(str(match_year.group(0)), '')
+                    lineEdited = lineEdited[7:]
+                    match_ppb1 = re.match(patterns[1], lineEdited)
+                    if (str(match_ppb1.group(0)) != 'nan'):
+                        lineEdited = lineEdited.replace(str(match_ppb1.group(0)), '')
+                        match_ppb2 = re.match(patterns[2], lineEdited)
+                        this_year = str(match_year.group(0))
+                        this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
+                        counter = 1
+                        while counter <= 12:
+                            this_year = this_year + '_' + str(counter)
+                            data[this_year] = float(this_ppb)
+                            counter =+ 1
         fp.close()
 
         basepath = os.path.dirname(__file__)
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
         outfile = open(filePath, 'w')
-        json.dump(dataObject[0], outfile)
+        json.dump(data, outfile)
         learn_data.average_dataset('N2O')
         data = None
         outfile = open('data/N2ODataLines.txt', 'w')
