@@ -394,7 +394,7 @@ def write_CFC12():
         json.dump(dataObject[0], outfile)
         learn_data.average_dataset('CFC12')
         data = None
-        outfile = open('data/CFC11DataLines.txt', 'w')
+        outfile = open('data/CFC12DataLines.txt', 'w')
         outfile.write(str(linesInData))
         outfile.close()
     except Exception:
@@ -452,7 +452,7 @@ def write_Temperature():
         outfile = open(filePath, 'w')      
         json.dump(data, outfile)
         data = None
-        outfile = open('data/CFC12DataLines.txt', 'w')
+        outfile = open('data/TemperatureDataLines.txt', 'w')
         outfile.write(str(linesInData))
         outfile.close()
     except Exception:
@@ -464,10 +464,10 @@ def update_Temperature():
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
-        fp = open('data/CFC12DataLines.txt')
+        fp = open('data/TemperatureDataLines.txt')
         for line in fp:
             linesInData = int(line)
-        fp = open('data/CFC12Data.txt')
+        fp = open('data/TemperatureData.txt')
         updatedFile = itertools.islice(fp, linesInData)
         fp.close()
         
@@ -482,12 +482,12 @@ def update_Temperature():
                     data[int(this_year)] = float(this_temp)
 
         basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
+        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json"))
         outfile = open(filePath, 'a')
         json.dump(data, outfile)
         data = None
         updatedFile = None
-        outfile = open('data/CFC12DataLines.txt', 'w')
+        outfile = open('data/TemperatureDataLines.txt', 'w')
         outfile.write(str(linesInData))
         outfile.close()
     except Exception:
@@ -496,10 +496,15 @@ def update_Temperature():
 
 def update_All():
     update_CO2()
+    time.sleep(5)
     update_N2O()
+    time.sleep(5)
     update_CH4()
+    time.sleep(5)
     update_CFC11()
+    time.sleep(5)
     update_CFC12()
+    time.sleep(5)
     update_Temperature()
 
 def write_All():

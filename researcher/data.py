@@ -1,6 +1,7 @@
 import urllib.request
 import os
 from . import write_data_final
+import time
 
 
 def retrieve_CO2():
@@ -44,7 +45,13 @@ def retrieve_All():
     if not os.path.exists('data'):
         os.makedirs('data')
     retrieve_CO2()
+    time.sleep(5)
     retrieve_N2O()
+    time.sleep(5)
     retrieve_CH4()
+    time.sleep(5)
     retrieve_CFC11()
+    time.sleep(5)
     retrieve_CFC12()
+    time.sleep(5)
+    retrieve_Temperature()
