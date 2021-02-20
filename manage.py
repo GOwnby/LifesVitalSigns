@@ -41,7 +41,7 @@ def main():
     CURRENT_TIME_STAMPS.append(CURRENT_TIME_STAMPS2[1])
 
     FILES_UPDATED = False
-    if CURRENT_TIME_STAMPS[2] > FILES_LAST_UPDATED_STAMPS[2]:
+    if int(CURRENT_TIME_STAMPS[2]) > int(FILES_LAST_UPDATED_STAMPS[2]):
         try:
             retrieve_All()
             FILES_UPDATED = True
@@ -49,8 +49,8 @@ def main():
             FILES_UPDATED = False
             print('Files failed to update.')
     
-    if CURRENT_TIME_STAMPS[2] == FILES_LAST_UPDATED_STAMPS[2]:
-        if CURRENT_TIME_STAMPS[1] > FILES_LAST_UPDATED_STAMPS[1]:
+    if int(CURRENT_TIME_STAMPS[2]) == int(FILES_LAST_UPDATED_STAMPS[2]):
+        if int(CURRENT_TIME_STAMPS[1]) > int(FILES_LAST_UPDATED_STAMPS[1]):
             try:
                 retrieve_All()
                 FILES_UPDATED = True
