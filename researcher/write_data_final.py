@@ -3,6 +3,7 @@ import re
 from . import learn_data
 import os
 import itertools
+import time
 
 def findStartYear(dataset):
     thisDataset = ''
@@ -507,8 +508,13 @@ def write_All():
     if not os.path.exists(path):
         os.makedirs(path)
     write_CO2()
+    time.sleep(5)
     write_N2O()
+    time.sleep(5)
     write_CH4()
+    time.sleep(5)
     write_CFC11()
+    time.sleep(5)
     write_CFC12()
+    time.sleep(5)
     write_Temperature()
