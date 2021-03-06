@@ -141,6 +141,7 @@ def write_CO2():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CO2Data.txt')
@@ -173,6 +174,7 @@ def update_CO2():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CO2DataLines.txt')
@@ -208,6 +210,7 @@ def write_N2O():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
 
@@ -248,6 +251,7 @@ def update_N2O():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
 
@@ -293,6 +297,7 @@ def write_CH4():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CH4Data.txt')
@@ -325,6 +330,7 @@ def update_CH4():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CH4DataLines.txt')
@@ -360,6 +366,7 @@ def write_CFC11():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
     
@@ -399,6 +406,7 @@ def update_CFC11():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
     
@@ -446,6 +454,7 @@ def write_CFC12():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
 
@@ -485,6 +494,7 @@ def update_CFC12():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
 
@@ -532,6 +542,7 @@ def write_Temperature():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
         fp = open('data/TemperatureData.txt')
@@ -563,6 +574,7 @@ def update_Temperature():
     global data
     global pattern_year
     global linesInData
+    data = {}
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
         fp = open('data/TemperatureDataLines.txt')
