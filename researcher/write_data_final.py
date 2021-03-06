@@ -3,7 +3,10 @@ import re
 from . import learn_data
 import os
 import itertools
-import time
+
+data = {}
+pattern_year = r'[0-9][0-9][0-9][0-9]'
+linesInData = 0
 
 def findStartYear(dataset):
     thisDataset = ''
@@ -135,8 +138,9 @@ def function_write(data, fp, patterns, linesInData):
     
 
 def write_CO2():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CO2Data.txt')
@@ -166,8 +170,9 @@ def write_CO2():
 
 
 def update_CO2():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CO2DataLines.txt')
@@ -200,63 +205,94 @@ def update_CO2():
 
 
 def write_N2O():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
-    patterns = [pattern_year, pattern_ppb1, pattern_ppb2]
-    try:
-        fp = open('data/N2OData.txt')
-        linesInData = 0
-        dataObject = function_write(data, fp, patterns, linesInData)
-        linesInData = dataObject[1]
-        fp.close()
 
-        basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
-        outfile = open(filePath, 'w')
-        json.dump(dataObject[0], outfile)
-        learn_data.average_dataset('N2O')
-        data = None
-        outfile = open('data/N2ODataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print("Error retrieving file")
+    fp = open('data/N2OData.txt')
+    linesInData = 0
+    for line in fp:
+        linesInData += 1
+        if not(re.match('#', line)):
+            if re.match(pattern_year, line):
+                match_year = re.match(pattern_year, line)
+                lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = lineEdited[7:]
+                match_ppb1 = re.match(pattern_ppb1, lineEdited)
+                if (str(match_ppb1.group(0)) != 'nan'):
+                    lineEdited = lineEdited.replace(str(match_ppb1.group(0)), '')
+                    match_ppb2 = re.match(pattern_ppb2, lineEdited)
+                    this_year = str(match_year.group(0))
+                    this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
+                    counter = 1
+                    while counter <= 12:
+                        this_year = this_year + '_' + str(counter)
+                        data[this_year] = float(this_ppb)
+                        counter =+ 1
+    fp.close()
+
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
+    outfile = open(filePath, 'w')
+    json.dump(data, outfile)
+    learn_data.average_dataset('N2O')
+    data = None
+    outfile = open('data/N2ODataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def update_N2O():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
-    patterns = [pattern_year, pattern_ppb1, pattern_ppb2]
-    try:
-        fp = open('data/N2ODataLines.txt')
-        for line in fp:
-            linesInData = int(line)
-        fp = open('data/N2OData.txt')
-        updatedFile = itertools.islice(fp, linesInData)
-        fp.close()
-        dataObject = function_write(data, updatedFile, patterns, linesInData)
-        linesInData = dataObject[1]
 
-        basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
-        outfile = open(filePath, 'a')
-        json.dump(dataObject[0], outfile)
-        data = None
-        updatedFile = None
-        outfile = open('data/N2ODataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print('Error updating JSON')
+    fp = open('data/N2ODataLines.txt')
+    for line in fp:
+        linesInData = int(line)
+    fp = open('data/N2OData.txt')
+    updatedFile = itertools.islice(fp, linesInData)
+    fp.close()
+    
+    for line in updatedFile:
+        linesInData += 1
+        if not(re.match('#', line)):
+            if re.match(pattern_year, line):
+                match_year = re.match(pattern_year, line)
+                lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = lineEdited[7:]
+                match_ppb1 = re.match(pattern_ppb1, lineEdited)
+                if (str(match_ppb1.group(0)) != 'nan'):
+                    lineEdited = lineEdited.replace(str(match_ppb1.group(0)), '')
+                    match_ppb2 = re.match(pattern_ppb2, lineEdited)
+                    this_year = str(match_year.group(0))
+                    this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
+                    counter = 1
+                    while counter <= 12:
+                        this_year = this_year + '_' + str(counter)
+                        data[this_year] = float(this_ppb)
+                        counter =+ 1
+    updatedFile.close()
+
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
+    outfile = open(filePath, 'a')
+    json.dump(data, outfile)
+    data = None
+    updatedFile = None
+    outfile = open('data/N2ODataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def write_CH4():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CH4Data.txt')
@@ -286,8 +322,9 @@ def write_CH4():
 
 
 def update_CH4():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
         fp = open('data/CH4DataLines.txt')
@@ -320,118 +357,181 @@ def update_CH4():
 
 
 def write_CFC11():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
-    patterns = [pattern_year, pattern_ppt1, pattern_ppt2]
-    try:
-        fp = open('data/CFC11Data.txt')
-        linesInData = 0
-        dataObject = function_write(data, fp, patterns, linesInData)
-        linesInData = dataObject[1]
-        fp.close()
+    
+    fp = open('data/CFC11Data.txt')
+    linesInData = 0
+    for line in fp:
+        linesInData += 1
+        if not(re.match('#', line)):
+            if re.match(pattern_year, line):
+                match_year = re.match(pattern_year, line)
+                lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = lineEdited[7:]
+                match_ppt1 = re.match(pattern_ppt1, lineEdited)
+                if (str(match_ppt1.group(0)) != 'nan'):
+                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                    this_year = str(match_year.group(0))
+                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                    counter = 1
+                    while counter <= 12:
+                        this_year = this_year + '_' + str(counter)
+                        data[this_year] = float(this_ppt)
+                        counter =+ 1
+    fp.close()
 
-        basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
-        outfile = open(filePath, 'w')   
-        json.dump(dataObject[0], outfile)
-        learn_data.average_dataset('CFC11')
-        data = None
-        outfile = open('data/CFC11DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print("Error retrieving file")
-
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
+    outfile = open(filePath, 'w')   
+    json.dump(data, outfile)
+    learn_data.average_dataset('CFC11')
+    data = None
+    outfile = open('data/CFC11DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 def update_CFC11():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
-    patterns = [pattern_year, pattern_ppt1, pattern_ppt2]
-    try:
-        fp = open('data/CFC11DataLines.txt')
-        for line in fp:
-            linesInData = int(line)
-        fp = open('data/CFC11Data.txt')
-        updatedFile = itertools.islice(fp, linesInData)
-        fp.close()
+    
+    fp = open('data/CFC11DataLines.txt')
+    for line in fp:
+        linesInData = int(line)
+    fp = open('data/CFC11Data.txt')
+    updatedFile = itertools.islice(fp, linesInData)
+    fp.close()
         
-        dataObject = function_write(data, updatedFile, patterns, linesInData)
-        linesInData = dataObject[1]
+    fp = open('data/CFC11Data.txt')
+    linesInData = 0
+    for line in updatedFile:
+        linesInData += 1
+        if not(re.match('#', line)):
+            if re.match(pattern_year, line):
+                match_year = re.match(pattern_year, line)
+                lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = lineEdited[7:]
+                match_ppt1 = re.match(pattern_ppt1, lineEdited)
+                if (str(match_ppt1.group(0)) != 'nan'):
+                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                    this_year = str(match_year.group(0))
+                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                    counter = 1
+                    while counter <= 12:
+                        this_year = this_year + '_' + str(counter)
+                        data[this_year] = float(this_ppt)
+                        counter =+ 1
+    updatedFile.close()
 
-        basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
-        outfile = open(filePath, 'a')
-        json.dump(dataObject[0], outfile)
-        data = None
-        updatedFile = None
-        outfile = open('data/CFC11DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print('Error updating JSON')
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
+    outfile = open(filePath, 'a')
+    json.dump(data, outfile)
+    data = None
+    updatedFile = None
+    outfile = open('data/CFC11DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def write_CFC12():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
-    patterns = [pattern_year, pattern_ppt1, pattern_ppt2]
-    try:
-        fp = open('data/CFC12Data.txt')
-        linesInData = 0
-        dataObject = function_write(data, fp, patterns, linesInData)
-        linesInData = dataObject[1]
-        fp.close()
 
-        basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
-        outfile = open(filePath, 'w')  
-        json.dump(dataObject[0], outfile)
-        learn_data.average_dataset('CFC12')
-        data = None
-        outfile = open('data/CFC12DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print("Error retrieving file")
+    fp = open('data/CFC12Data.txt')
+    linesInData = 0
+    for line in fp:
+        linesInData += 1
+        if not(re.match('#', line)):
+            if re.match(pattern_year, line):
+                match_year = re.match(pattern_year, line)
+                lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = lineEdited[7:]
+                match_ppt1 = re.match(pattern_ppt1, lineEdited)
+                if (str(match_ppt1.group(0)) != 'nan'):
+                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                    this_year = str(match_year.group(0))
+                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                    counter = 1
+                    while counter <= 12:
+                        this_year = this_year + '_' + str(counter)
+                        data[this_year] = float(this_ppt)
+                        counter =+ 1
+    fp.close()
+
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
+    outfile = open(filePath, 'w')  
+    json.dump(data, outfile)
+    learn_data.average_dataset('CFC12')
+    data = None
+    outfile = open('data/CFC12DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 def update_CFC12():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
-    patterns = [pattern_year, pattern_ppt1, pattern_ppt2]
-    try:
-        fp = open('data/CFC12DataLines.txt')
-        for line in fp:
-            linesInData = int(line)
-        fp = open('data/CFC12Data.txt')
-        updatedFile = itertools.islice(fp, linesInData)
-        fp.close()
-        
-        dataObject = function_write(data, updatedFile, patterns, linesInData)
-        linesInData = dataObject[1]
 
-        basepath = os.path.dirname(__file__)
-        filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
-        outfile = open(filePath, 'a')
-        json.dump(dataObject[0], outfile)
-        data = None
-        updatedFile = None
-        outfile = open('data/CFC12DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print('Error updating JSON')
+    fp = open('data/CFC12DataLines.txt')
+    for line in fp:
+        linesInData = int(line)
+    fp = open('data/CFC12Data.txt')
+    updatedFile = itertools.islice(fp, linesInData)
+    fp.close()
+
+    fp = open('data/CFC12Data.txt')
+    linesInData = 0
+    for line in updatedFile:
+        linesInData += 1
+        if not(re.match('#', line)):
+            if re.match(pattern_year, line):
+                match_year = re.match(pattern_year, line)
+                lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = lineEdited[7:]
+                match_ppt1 = re.match(pattern_ppt1, lineEdited)
+                if (str(match_ppt1.group(0)) != 'nan'):
+                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                    this_year = str(match_year.group(0))
+                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                    counter = 1
+                    while counter <= 12:
+                        this_year = this_year + '_' + str(counter)
+                        data[this_year] = float(this_ppt)
+                        counter =+ 1
+    updatedFile.close()
+
+    basepath = os.path.dirname(__file__)
+    filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
+    outfile = open(filePath, 'a')
+    json.dump(data, outfile)
+    data = None
+    updatedFile = None
+    outfile = open('data/CFC12DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
+
 
 def write_Temperature():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
         fp = open('data/TemperatureData.txt')
@@ -460,8 +560,9 @@ def write_Temperature():
 
 
 def update_Temperature():
-    data = {}
-    pattern_year = r'[0-9][0-9][0-9][0-9]'
+    global data
+    global pattern_year
+    global linesInData
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
         fp = open('data/TemperatureDataLines.txt')
@@ -496,15 +597,10 @@ def update_Temperature():
 
 def update_All():
     update_CO2()
-    time.sleep(5)
     update_N2O()
-    time.sleep(5)
     update_CH4()
-    time.sleep(5)
     update_CFC11()
-    time.sleep(5)
     update_CFC12()
-    time.sleep(5)
     update_Temperature()
 
 def write_All():
@@ -513,13 +609,8 @@ def write_All():
     if not os.path.exists(path):
         os.makedirs(path)
     write_CO2()
-    time.sleep(5)
-    write_CH4()
-    time.sleep(5)
-    write_CFC11()
-    time.sleep(5)
-    write_CFC12()
-    time.sleep(5)
-    write_Temperature()
     write_N2O()
-    time.sleep(5)
+    write_CH4()
+    write_CFC11()
+    write_CFC12()
+    write_Temperature()
