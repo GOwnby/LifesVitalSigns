@@ -132,7 +132,7 @@ def function_write(data, fp, patterns, linesInData):
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppb)
-                        counter =+ 1
+                        counter += 1
     dataObject = [data, linesInData]
     return dataObject
     
@@ -233,7 +233,7 @@ def write_N2O():
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppb)
-                        counter =+ 1
+                        counter += 1
     fp.close()
 
     basepath = os.path.dirname(__file__)
@@ -279,7 +279,7 @@ def update_N2O():
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppb)
-                        counter =+ 1
+                        counter += 1
     updatedFile.close()
 
     basepath = os.path.dirname(__file__)
@@ -389,7 +389,7 @@ def write_CFC11():
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppt)
-                        counter =+ 1
+                        counter += 1
     fp.close()
 
     basepath = os.path.dirname(__file__)
@@ -436,7 +436,7 @@ def update_CFC11():
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppt)
-                        counter =+ 1
+                        counter += 1
     updatedFile.close()
 
     basepath = os.path.dirname(__file__)
@@ -477,7 +477,7 @@ def write_CFC12():
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppt)
-                        counter =+ 1
+                        counter += 1
     fp.close()
 
     basepath = os.path.dirname(__file__)
@@ -524,7 +524,7 @@ def update_CFC12():
                     while counter <= 12:
                         this_year = this_year + '_' + str(counter)
                         data[this_year] = float(this_ppt)
-                        counter =+ 1
+                        counter += 1
     updatedFile.close()
 
     basepath = os.path.dirname(__file__)
