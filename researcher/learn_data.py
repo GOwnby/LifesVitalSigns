@@ -40,28 +40,28 @@ def average_dataset(dataset):
     basepath = os.path.dirname(__file__)
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
-    with open(filePath) as json_file:
-        data = json.load(json_file)
-        newData = {}
-        beginYear = 1977
-        while beginYear <= thisYear:
-            currentSet = {}
-            month = 0
-            countMonth = 0
-            thisSum = 0.0
-            while month <= 12:
-                month +=  1
-                try:
-                    entry = data[(str(beginYear) + '_' + str(month))]
-                    currentSet[month] = entry
-                except KeyError:
-                    currentSet[month] = 0.0
-            while countMonth <= 12:
-                countMonth += 1
-                thisSum = thisSum + currentSet[countMonth]
-            average = thisSum / float(countMonth)
-            newData[beginYear] = average
-            beginYear = beginYear + 1
+    data = open(filePath)
+    data = json.load(data)
+    newData = {}
+    beginYear = 1977
+    while beginYear <= thisYear:
+        currentSet = {}
+        month = 0
+        countMonth = 0
+        thisSum = 0.0
+        while month <= 12:
+            month +=  1
+            try:
+                entry = data[(str(beginYear) + '_' + str(month))]
+                currentSet[month] = entry
+            except KeyError:
+                currentSet[month] = 0.0
+        while countMonth <= 12:
+            countMonth += 1
+            thisSum = thisSum + currentSet[countMonth]
+        average = thisSum / float(countMonth)
+        newData[beginYear] = average
+        beginYear = beginYear + 1
     outfile = open(filePath, 'w')
     json.dump(newData, outfile)
     outfile.close()
@@ -160,27 +160,27 @@ def basicProjection(dataset):
     basepath = os.path.dirname(__file__)
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
-    with open(filePath) as json_file:
-        data = json.load(json_file)
+    data = open(filePath)
+    data = json.load(data)
         
-        startLoad = ""
-        counter = 0
-        while len(startLoad) < 2:
-            try:
-                startLoad = data[thisYear + counter]
-                startLoad = str(startLoad)
-                startYear = thisYear + counter
-            except KeyError:
-                counter = counter - 1
+    startLoad = ""
+    counter = 0
+    while len(startLoad) < 2:
+        try:
+            startLoad = data[thisYear + counter]
+            startLoad = str(startLoad)
+            startYear = thisYear + counter
+        except KeyError:
+            counter = counter - 1
 
-        startLoad = float(startLoad)
-        precedingLoad = float(data[(startYear) - 1])
-        changeInLoad = startLoad - precedingLoad
-        projectedSet[startYear + 1] = startLoad + changeInLoad
-        startYear += 2
-        while startYear <= endYear:
-            projectedSet[startYear] = projectedSet[startYear - 1] + changeInLoad
-            startYear += 1
+    startLoad = float(startLoad)
+    precedingLoad = float(data[(startYear) - 1])
+    changeInLoad = startLoad - precedingLoad
+    projectedSet[startYear + 1] = startLoad + changeInLoad
+    startYear += 2
+    while startYear <= endYear:
+        projectedSet[startYear] = projectedSet[startYear - 1] + changeInLoad
+        startYear += 1
 
     outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + 
         thisDataset + 'BasicProjection.json', 'w')
