@@ -15,6 +15,8 @@ def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LifesVitalSigns.settings')
     execute_from_command_line(sys.argv)
 
+    logger.write_status('00-00=0000', '00-00=0000', '00-00=0000')
+
     SERVER_LAST_STARTED = logger.read_status('SERVER_STARTED_TIMESTAMP')
     SERVER_LAST_STARTED_STAMPS = SERVER_LAST_STARTED.split('-')
     SERVER_LAST_STARTED_STAMPS2 = SERVER_LAST_STARTED_STAMPS[1].split('=')
@@ -41,7 +43,7 @@ def main():
     CURRENT_TIME_STAMPS.append(CURRENT_TIME_STAMPS2[1])
 
     FILES_UPDATED = False
-    if int(CURRENT_TIME_STAMPS[2]) > int(FILES_LAST_UPDATED_STAMPS[2]):
+    if (int(CURRENT_TIME_STAMPS[2]) > int(FILES_LAST_UPDATED_STAMPS[2])) or (FILES_LAST_UPDATED == '00-00=0000'):
         try:
             retrieve_All()
             FILES_UPDATED = True
