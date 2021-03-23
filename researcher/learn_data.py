@@ -37,7 +37,7 @@ def average_dataset(dataset):
     if dataset == 'CFC12':
         thisDataset = 'CFC12Data.json'
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
@@ -157,7 +157,7 @@ def basicProjection(dataset):
     thisYear = currentYear()
     endYear = currentYear + 100
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
@@ -194,7 +194,7 @@ def basicProjection(dataset):
 # https://www.esrl.noaa.gov/gmd/aggi/aggi.html
 def calculateChangeInRadiativeFlux(searchYear):
     thisYear = currentYear()
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/'))
 
     # Contains initial values of: CO2 PPM, N2O PPB, CH4 PPB, CFC-11 PPT, CFC-12 PPT
@@ -337,7 +337,8 @@ def calculateChangeInClimateSensitivityParameter(searchYear):
 # Changes in radiative flux are a function of projected changes in atmospheric composition
 # Changes in the Climate Sensitivity Parameter are a function of projected changes in radiatve flux and the rate of change of the rate of change of temperature
 def projectTemperature():
-    basepath = os.path.dirname(__file__)
+    #basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/'))
     startYear = currentYear()
     nextCentury = startYear + 100

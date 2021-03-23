@@ -7,6 +7,7 @@ import itertools
 data = {}
 pattern_year = r'[0-9][0-9][0-9][0-9]'
 linesInData = 0
+this_year = 0
 
 def findStartYear(dataset):
     thisDataset = ''
@@ -141,6 +142,7 @@ def write_CO2():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -158,7 +160,7 @@ def write_CO2():
                         data[int(this_year)] = float(this_ppm)
 
         fp.close()
-        basepath = os.path.dirname(__file__)
+        basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CO2Data.json"))
         outfile = open(filePath, 'w')
         json.dump(data, outfile)
@@ -174,6 +176,7 @@ def update_CO2():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -193,7 +196,7 @@ def update_CO2():
                     this_ppm = match_ppm.group(0)
                     data[int(this_year)] = float(this_ppm)
 
-        basepath = os.path.dirname(__file__)
+        basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CO2Data.json"))
         outfile = open(filePath, 'a')
         json.dump(data, outfile)
@@ -210,6 +213,7 @@ def write_N2O():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
@@ -236,7 +240,7 @@ def write_N2O():
                         counter += 1
     fp.close()
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
     outfile = open(filePath, 'w')
     json.dump(data, outfile)
@@ -251,6 +255,7 @@ def update_N2O():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
@@ -282,7 +287,7 @@ def update_N2O():
                         counter += 1
     updatedFile.close()
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
@@ -297,6 +302,7 @@ def write_CH4():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -314,7 +320,7 @@ def write_CH4():
                         data[int(this_year)] = float(this_ppb)
 
         fp.close()
-        basepath = os.path.dirname(__file__)
+        basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CH4Data.json"))
         outfile = open(filePath, 'w')    
         json.dump(data, outfile)
@@ -330,6 +336,7 @@ def update_CH4():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
@@ -349,7 +356,7 @@ def update_CH4():
                     this_ppb = match_ppb.group(0)
                     data[int(this_year)] = float(this_ppb)
 
-        basepath = os.path.dirname(__file__)
+        basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CH4Data.json"))
         outfile = open(filePath, 'a')
         json.dump(data, outfile)
@@ -366,6 +373,7 @@ def write_CFC11():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -392,7 +400,7 @@ def write_CFC11():
                         counter += 1
     fp.close()
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
     outfile = open(filePath, 'w')   
     json.dump(data, outfile)
@@ -406,6 +414,7 @@ def update_CFC11():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -439,7 +448,7 @@ def update_CFC11():
                         counter += 1
     updatedFile.close()
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
@@ -454,6 +463,7 @@ def write_CFC12():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -480,7 +490,7 @@ def write_CFC12():
                         counter += 1
     fp.close()
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
     outfile = open(filePath, 'w')  
     json.dump(data, outfile)
@@ -494,6 +504,7 @@ def update_CFC12():
     global data
     global pattern_year
     global linesInData
+    global this_year
     data = {}
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
@@ -527,7 +538,7 @@ def update_CFC12():
                         counter += 1
     updatedFile.close()
 
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
