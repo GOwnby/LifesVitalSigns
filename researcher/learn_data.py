@@ -56,7 +56,7 @@ def average_dataset(dataset):
                 #thisSum = thisSum + entry
                 entryTest = entryTest + entry
                 entryIndice += 1
-            except KeyError:
+            except IndexError:
                 month = month - 1
                 break
         #average = thisSum / float(month)
@@ -66,7 +66,8 @@ def average_dataset(dataset):
     #json.dump(newData, outfile)
     #outfile.close()
     data = None
-    newData = None
+    #newData = None
+    print(entryTest)
 
 # Unused Calculations, most recent rate of change is used to project future atmospheric composition as opposed to average rate of change
 # to reflect changing energy consumption and pollution within this era
