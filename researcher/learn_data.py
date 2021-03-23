@@ -41,7 +41,7 @@ def average_dataset(dataset):
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
-    data = json.load(data)
+    data = json.loads(data)
     newData = {}
     beginYear = 1977
     entryIndice = 0
