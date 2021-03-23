@@ -41,28 +41,30 @@ def average_dataset(dataset):
     filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
-    data = json.loads(data)
+    data = json.load(data)
     newData = {}
     beginYear = 1977
     entryIndice = 0
+    entryTest = ""
     while beginYear <= thisYear:
         month = 0
-        thisSum = 0.0
+        #thisSum = 0.0
         while month < 12:
             month +=  1
             try:
-                entry = float(data[entryIndice])
-                thisSum = thisSum + entry
+                entry = data[entryIndice]
+                #thisSum = thisSum + entry
+                entryTest = entryTest + entry
                 entryIndice += 1
             except KeyError:
                 month = month - 1
                 break
-        average = thisSum / float(month)
-        newData[beginYear] = average
-        beginYear = beginYear + 1
-    outfile = open(filePath, 'w')
-    json.dump(newData, outfile)
-    outfile.close()
+        #average = thisSum / float(month)
+        #newData[beginYear] = average
+        #beginYear = beginYear + 1
+    #outfile = open(filePath, 'w')
+    #json.dump(newData, outfile)
+    #outfile.close()
     data = None
     newData = None
 
