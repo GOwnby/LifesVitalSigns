@@ -136,6 +136,22 @@ def function_write(data, fp, patterns, linesInData):
                         counter += 1
     dataObject = [data, linesInData]
     return dataObject
+
+def function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited):
+    try:
+        if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
+            lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+            match_ppt2 = re.match(pattern_ppt2, lineEdited)
+            this_year = str(match_year.group(0))
+            this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+            counter = 1
+            while counter <= 12:
+                year_month = this_year + '_' + str(counter)
+                data[year_month] = float(this_ppt)
+                counter += 1
+    except AttributeError:
+        return data
+    return data
     
 
 def write_CO2():
@@ -234,7 +250,7 @@ def write_N2O():
                         counter += 1
     fp.close()
 
-    data = learn_data.average_dataset(data)
+    #data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json'
     outfile = open(filePath, 'w')
     json.dump(data, outfile)
@@ -374,19 +390,7 @@ def write_CFC11():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                try:
-                    if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                        this_year = str(match_year.group(0))
-                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
-                        while counter <= 12:
-                            year_month = this_year + '_' + str(counter)
-                            data[year_month] = float(this_ppt)
-                            counter += 1
-                except AttributeError:
-                    break
+                data = function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited)
     fp.close()
 
     data = learn_data.average_dataset(data)
@@ -424,19 +428,7 @@ def update_CFC11():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                try:
-                    if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                        this_year = str(match_year.group(0))
-                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
-                        while counter <= 12:
-                            year_month = this_year + '_' + str(counter)
-                            data[year_month] = float(this_ppt)
-                            counter += 1
-                except AttributeError:
-                    break
+                data = function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited)
 
     data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
@@ -468,19 +460,7 @@ def write_CFC12():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                try:
-                    if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                        this_year = str(match_year.group(0))
-                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
-                        while counter <= 12:
-                            year_month = this_year + '_' + str(counter)
-                            data[year_month] = float(this_ppt)
-                            counter += 1
-                except AttributeError:
-                    break
+                data = function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited)
     fp.close()
 
     data = learn_data.average_dataset(data)
@@ -518,19 +498,7 @@ def update_CFC12():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                try:
-                    if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                        this_year = str(match_year.group(0))
-                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
-                        while counter <= 12:
-                            year_month = this_year + '_' + str(counter)
-                            data[year_month] = float(this_ppt)
-                            counter += 1
-                except AttributeError:
-                    break
+                data = function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited)
 
     data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'

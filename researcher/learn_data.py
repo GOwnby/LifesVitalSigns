@@ -47,7 +47,7 @@ def average_dataset(data):
                 break
         average = thisSum / float(month)
         newData[beginYear] = average
-        beginYear = beginYear + 1
+        beginYear += 1
     return newData
 
 # Unused Calculations, most recent rate of change is used to project future atmospheric composition as opposed to average rate of change
