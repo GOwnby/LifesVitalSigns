@@ -394,9 +394,9 @@ def write_CFC11():
                         match_ppt2 = re.match(pattern_ppt2, lineEdited)
                         this_year = str(match_year.group(0))
                         this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
                     except AttributeError:
                         break
+                    counter = 1
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -406,7 +406,7 @@ def write_CFC11():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
     outfile = open(filePath, 'w')   
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     learn_data.average_dataset('CFC11')
     data = None
     outfile = open('data/CFC11DataLines.txt', 'w')
@@ -445,9 +445,9 @@ def update_CFC11():
                         match_ppt2 = re.match(pattern_ppt2, lineEdited)
                         this_year = str(match_year.group(0))
                         this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
                     except AttributeError:
                         break
+                    counter = 1
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -457,7 +457,7 @@ def update_CFC11():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
     outfile = open(filePath, 'a')
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/CFC11DataLines.txt', 'w')
@@ -490,9 +490,9 @@ def write_CFC12():
                         match_ppt2 = re.match(pattern_ppt2, lineEdited)
                         this_year = str(match_year.group(0))
                         this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
                     except AttributeError:
                         break
+                    counter = 1
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -502,7 +502,7 @@ def write_CFC12():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
     outfile = open(filePath, 'w')  
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     learn_data.average_dataset('CFC12')
     data = None
     outfile = open('data/CFC12DataLines.txt', 'w')
@@ -541,9 +541,9 @@ def update_CFC12():
                         match_ppt2 = re.match(pattern_ppt2, lineEdited)
                         this_year = str(match_year.group(0))
                         this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                        counter = 1
                     except AttributeError:
                         break
+                    counter = 1
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -553,7 +553,7 @@ def update_CFC12():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
     outfile = open(filePath, 'a')
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/CFC12DataLines.txt', 'w')
