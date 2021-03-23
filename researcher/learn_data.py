@@ -54,7 +54,7 @@ def average_dataset(dataset):
                 entry = float(data[entryIndice])
                 thisSum = thisSum + entry
                 entryIndice += 1
-            except IndexError:
+            except Exception:
                 month = month - 1
                 break
         average = thisSum / float(month)
