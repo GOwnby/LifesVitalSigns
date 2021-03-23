@@ -38,7 +38,7 @@ def average_dataset(dataset):
         thisDataset = 'CFC12Data.json'
 
     basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
+    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
     data = json.load(data)
@@ -157,7 +157,7 @@ def basicProjection(dataset):
     endYear = currentYear + 100
 
     basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
+    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
     data = json.load(data)
@@ -181,8 +181,8 @@ def basicProjection(dataset):
         projectedSet[startYear] = projectedSet[startYear - 1] + changeInLoad
         startYear += 1
 
-    outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + 
-        thisDataset + 'BasicProjection.json', 'w')
+    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + 'BasicProjection.json'))
+    outfile = open(filePath, 'w')
     json.dump(str(projectedSet), outfile)
     outfile.close()
     data = None
@@ -194,7 +194,7 @@ def basicProjection(dataset):
 def calculateChangeInRadiativeFlux(searchYear):
     thisYear = currentYear()
     basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/'))
+    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/'))
 
     # Contains initial values of: CO2 PPM, N2O PPB, CH4 PPB, CFC-11 PPT, CFC-12 PPT
     initialValues = []
@@ -272,7 +272,7 @@ def functionInterdependence(CH4PPB, N2OPBB):
 
 def calculateChangeInTemperature(searchYear):
     basepath = os.path.dirname(__file__)
-    filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/'))
+    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/'))
     with open(filePath + 'TemperatureData.json') as json_file:
         data = json.load(json_file)
 
@@ -338,7 +338,7 @@ def calculateChangeInClimateSensitivityParameter(searchYear):
 def projectTemperature():
     #basepath = os.path.dirname(__file__)
     basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, '..', 'LifesVitalSigns/static/static_dirs/js/json/'))
+    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/'))
     startYear = currentYear()
     nextCentury = startYear + 100
     changesOfChangeInTemperature = {}
