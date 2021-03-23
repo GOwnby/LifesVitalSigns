@@ -163,7 +163,7 @@ def write_CO2():
         basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CO2Data.json"))
         outfile = open(filePath, 'w')
-        json.dump(data, outfile)
+        json.dumps(data, outfile)
         data = None
         outfile = open('data/CO2DataLines.txt', 'w')
         outfile.write(str(linesInData))
@@ -199,7 +199,7 @@ def update_CO2():
         basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CO2Data.json"))
         outfile = open(filePath, 'a')
-        json.dump(data, outfile)
+        json.dumps(data, outfile)
         data = None
         updatedFile = None
         outfile = open('data/CO2DataLines.txt', 'w')
@@ -243,7 +243,7 @@ def write_N2O():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
     outfile = open(filePath, 'w')
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
     learn_data.average_dataset('N2O')
     data = None
     outfile = open('data/N2ODataLines.txt', 'w')
@@ -290,7 +290,7 @@ def update_N2O():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
     outfile = open(filePath, 'a')
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/N2ODataLines.txt', 'w')
@@ -323,7 +323,7 @@ def write_CH4():
         basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CH4Data.json"))
         outfile = open(filePath, 'w')    
-        json.dump(data, outfile)
+        json.dumps(data, outfile)
         data = None
         outfile = open('data/CO2DataLines.txt', 'w')
         outfile.write(str(linesInData))
@@ -359,7 +359,7 @@ def update_CH4():
         basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CH4Data.json"))
         outfile = open(filePath, 'a')
-        json.dump(data, outfile)
+        json.dumps(data, outfile)
         data = None
         updatedFile = None
         outfile = open('data/CH4DataLines.txt', 'w')
@@ -403,7 +403,7 @@ def write_CFC11():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
     outfile = open(filePath, 'w')   
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
     learn_data.average_dataset('CFC11')
     data = None
     outfile = open('data/CFC11DataLines.txt', 'w')
@@ -451,7 +451,7 @@ def update_CFC11():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
     outfile = open(filePath, 'a')
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/CFC11DataLines.txt', 'w')
@@ -493,7 +493,7 @@ def write_CFC12():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
     outfile = open(filePath, 'w')  
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
     learn_data.average_dataset('CFC12')
     data = None
     outfile = open('data/CFC12DataLines.txt', 'w')
@@ -541,7 +541,7 @@ def update_CFC12():
     basepath = os.getcwd()
     filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
     outfile = open(filePath, 'a')
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/CFC12DataLines.txt', 'w')
@@ -569,10 +569,10 @@ def write_Temperature():
                     data[int(this_year)] = float(this_temp)
 
         fp.close()
-        basepath = os.path.dirname(__file__)
+        basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json"))
         outfile = open(filePath, 'w')      
-        json.dump(data, outfile)
+        json.dumps(data, outfile)
         data = None
         outfile = open('data/TemperatureDataLines.txt', 'w')
         outfile.write(str(linesInData))
@@ -605,10 +605,10 @@ def update_Temperature():
                     this_temp = match_temp.group(0)
                     data[int(this_year)] = float(this_temp)
 
-        basepath = os.path.dirname(__file__)
+        basepath = os.getcwd()
         filePath = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json"))
         outfile = open(filePath, 'a')
-        json.dump(data, outfile)
+        json.dumps(data, outfile)
         data = None
         updatedFile = None
         outfile = open('data/TemperatureDataLines.txt', 'w')

@@ -63,7 +63,7 @@ def average_dataset(dataset):
         newData[beginYear] = average
         beginYear = beginYear + 1
     outfile = open(filePath, 'w')
-    json.dump(newData, outfile)
+    json.dumps(newData, outfile)
     outfile.close()
     data = None
     newData = None
@@ -184,7 +184,7 @@ def basicProjection(dataset):
 
     outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + 
         thisDataset + 'BasicProjection.json', 'w')
-    json.dump(projectedSet, outfile)
+    json.dumps(projectedSet, outfile)
     outfile.close()
     data = None
 
@@ -380,4 +380,4 @@ def projectTemperature():
         changesOfChangeInTemperature[startYear] = (changesOfClimateSensitivityParameter[startYear - 1]) * (calculateChangeInRadiativeFlux(startYear - 1))
     
     outfile = open(filePath + 'TemperatureProjection.json', 'w')
-    json.dump(changesOfChangeInTemperature, outfile)
+    json.dumps(changesOfChangeInTemperature, outfile)
