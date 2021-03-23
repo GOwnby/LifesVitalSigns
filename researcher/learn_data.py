@@ -26,22 +26,9 @@ def learn_all():
 
     projectTemperature()
 
-def average_dataset(dataset):
+def average_dataset(data):
     thisYear = currentYear()
 
-    global thisDataset
-    if dataset == 'N2O':
-        thisDataset = 'N2OData.json'
-    if dataset == 'CFC11':
-        thisDataset = 'CFC11Data.json'
-    if dataset == 'CFC12':
-        thisDataset = 'CFC12Data.json'
-
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
-
-    data = open(filePath)
-    data = json.load(data)
     newData = {}
     beginYear = 1977
     entryIndice = 0
@@ -51,7 +38,7 @@ def average_dataset(dataset):
         while month < 12:
             month +=  1
             try:
-                entry = float(data[entryIndice])
+                entry = data[entryIndice]
                 thisSum = thisSum + entry
                 entryIndice += 1
             except Exception:
@@ -61,11 +48,7 @@ def average_dataset(dataset):
         average = thisSum / float(month)
         newData[beginYear] = average
         beginYear = beginYear + 1
-    outfile = open(filePath, 'w')
-    json.dump(str(newData), outfile)
-    outfile.close()
-    data = None
-    newData = None
+    return newData
 
 # Unused Calculations, most recent rate of change is used to project future atmospheric composition as opposed to average rate of change
 # to reflect changing energy consumption and pollution within this era
@@ -183,7 +166,7 @@ def basicProjection(dataset):
 
     filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + 'BasicProjection.json'))
     outfile = open(filePath, 'w')
-    json.dump(str(projectedSet), outfile)
+    json.dump(projectedSet, outfile)
     outfile.close()
     data = None
 
@@ -193,8 +176,7 @@ def basicProjection(dataset):
 # https://www.esrl.noaa.gov/gmd/aggi/aggi.html
 def calculateChangeInRadiativeFlux(searchYear):
     thisYear = currentYear()
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/'))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/'
 
     # Contains initial values of: CO2 PPM, N2O PPB, CH4 PPB, CFC-11 PPT, CFC-12 PPT
     initialValues = []
@@ -271,8 +253,7 @@ def functionInterdependence(CH4PPB, N2OPBB):
         ( ( (5.31) * ( (10) ** (-15) ) ) * (CH4PPB) * ( ( (CH4PPB) * (N2OPBB) ) ** (1.52) ) ) ) )
 
 def calculateChangeInTemperature(searchYear):
-    basepath = os.path.dirname(__file__)
-    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/'))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/'
     with open(filePath + 'TemperatureData.json') as json_file:
         data = json.load(json_file)
 
@@ -336,9 +317,7 @@ def calculateChangeInClimateSensitivityParameter(searchYear):
 # Changes in radiative flux are a function of projected changes in atmospheric composition
 # Changes in the Climate Sensitivity Parameter are a function of projected changes in radiatve flux and the rate of change of the rate of change of temperature
 def projectTemperature():
-    #basepath = os.path.dirname(__file__)
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/'))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/'
     startYear = currentYear()
     nextCentury = startYear + 100
     changesOfChangeInTemperature = {}
@@ -379,4 +358,4 @@ def projectTemperature():
         changesOfChangeInTemperature[startYear] = (changesOfClimateSensitivityParameter[startYear - 1]) * (calculateChangeInRadiativeFlux(startYear - 1))
     
     outfile = open(filePath + 'TemperatureProjection.json', 'w')
-    json.dump(str(changesOfChangeInTemperature), outfile)
+    json.dump(changesOfChangeInTemperature, outfile)

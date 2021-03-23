@@ -234,10 +234,10 @@ def write_N2O():
                         counter += 1
     fp.close()
 
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json'
     outfile = open(filePath, 'w')
     json.dump(data, outfile)
-    learn_data.average_dataset('N2O')
     data = None
     outfile = open('data/N2ODataLines.txt', 'w')
     outfile.write(str(linesInData))
@@ -278,8 +278,8 @@ def update_N2O():
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = this_ppb
                         counter += 1
-    updatedFile.close()
 
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
@@ -389,10 +389,10 @@ def write_CFC11():
                         counter += 1
     fp.close()
 
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
     outfile = open(filePath, 'w')   
     json.dump(data, outfile)
-    learn_data.average_dataset('CFC11')
     data = None
     outfile = open('data/CFC11DataLines.txt', 'w')
     outfile.write(str(linesInData))
@@ -438,6 +438,7 @@ def update_CFC11():
                         data[year_month] = float(this_ppt)
                         counter += 1
 
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
@@ -482,10 +483,10 @@ def write_CFC12():
                         counter += 1
     fp.close()
 
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
     outfile = open(filePath, 'w')  
     json.dump(data, outfile)
-    learn_data.average_dataset('CFC12')
     data = None
     outfile = open('data/CFC12DataLines.txt', 'w')
     outfile.write(str(linesInData))
@@ -531,6 +532,7 @@ def update_CFC12():
                         data[year_month] = float(this_ppt)
                         counter += 1
 
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
