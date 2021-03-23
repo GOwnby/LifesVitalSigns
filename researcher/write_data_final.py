@@ -236,7 +236,7 @@ def write_N2O():
                     counter = 1
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
-                        data[year_month] = float(this_ppb)
+                        data[year_month] = this_ppb
                         counter += 1
     fp.close()
 
@@ -283,7 +283,7 @@ def update_N2O():
                     counter = 1
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
-                        data[year_month] = float(this_ppb)
+                        data[year_month] = this_ppb
                         counter += 1
     updatedFile.close()
 

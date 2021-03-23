@@ -51,21 +51,20 @@ def average_dataset(dataset):
         while month < 12:
             month +=  1
             try:
-                print(data[entryIndice])
-                #entry = float(data[entryIndice])
-                #thisSum = thisSum + entry
+                entry = float(data[entryIndice])
+                thisSum = thisSum + entry
                 entryIndice += 1
             except KeyError:
                 month = month - 1
                 break
-        #average = thisSum / float(month)
-        #newData[beginYear] = average
-        #beginYear = beginYear + 1
-    #outfile = open(filePath, 'w')
-    #json.dump(newData, outfile)
-    #outfile.close()
+        average = thisSum / float(month)
+        newData[beginYear] = average
+        beginYear = beginYear + 1
+    outfile = open(filePath, 'w')
+    json.dump(newData, outfile)
+    outfile.close()
     data = None
-    #newData = None
+    newData = None
 
 # Unused Calculations, most recent rate of change is used to project future atmospheric composition as opposed to average rate of change
 # to reflect changing energy consumption and pollution within this era
