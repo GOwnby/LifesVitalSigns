@@ -588,7 +588,7 @@ def update_Temperature():
         match_year = re.search(pattern_year, line)
         match_temp = re.search(pattern_temp, line)
         if match_year is not None:
-                if match_temp is not None:
+            if match_temp is not None:
                 this_year = match_year.group(0)
                 this_temp = match_temp.group(0)
                 data[int(this_year)] = float(this_temp)
