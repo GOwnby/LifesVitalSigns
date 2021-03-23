@@ -231,8 +231,8 @@ def write_N2O():
                     this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
                     counter = 1
                     while counter <= 12:
-                        this_year = this_year + '_' + str(counter)
-                        data[this_year] = float(this_ppb)
+                        year_month = this_year + '_' + str(counter)
+                        data[year_month] = float(this_ppb)
                         counter += 1
     fp.close()
 
@@ -277,8 +277,8 @@ def update_N2O():
                     this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
                     counter = 1
                     while counter <= 12:
-                        this_year = this_year + '_' + str(counter)
-                        data[this_year] = float(this_ppb)
+                        year_month = this_year + '_' + str(counter)
+                        data[year_month] = float(this_ppb)
                         counter += 1
     updatedFile.close()
 
@@ -387,8 +387,8 @@ def write_CFC11():
                     this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
                     counter = 1
                     while counter <= 12:
-                        this_year = this_year + '_' + str(counter)
-                        data[this_year] = float(this_ppt)
+                        year_month = this_year + '_' + str(counter)
+                        data[year_month] = float(this_ppt)
                         counter += 1
     fp.close()
 
@@ -434,8 +434,8 @@ def update_CFC11():
                     this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
                     counter = 1
                     while counter <= 12:
-                        this_year = this_year + '_' + str(counter)
-                        data[this_year] = float(this_ppt)
+                        year_month = this_year + '_' + str(counter)
+                        data[year_month] = float(this_ppt)
                         counter += 1
     updatedFile.close()
 
@@ -475,8 +475,8 @@ def write_CFC12():
                     this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
                     counter = 1
                     while counter <= 12:
-                        this_year = this_year + '_' + str(counter)
-                        data[this_year] = float(this_ppt)
+                        year_month = this_year + '_' + str(counter)
+                        data[year_month] = float(this_ppt)
                         counter += 1
     fp.close()
 
@@ -522,8 +522,8 @@ def update_CFC12():
                     this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
                     counter = 1
                     while counter <= 12:
-                        this_year = this_year + '_' + str(counter)
-                        data[this_year] = float(this_ppt)
+                        year_month = this_year + '_' + str(counter)
+                        data[year_month] = float(this_ppt)
                         counter += 1
     updatedFile.close()
 
