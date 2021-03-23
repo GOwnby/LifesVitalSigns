@@ -389,11 +389,14 @@ def write_CFC11():
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
                 if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                    this_year = str(match_year.group(0))
-                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                    counter = 1
+                    try:
+                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                        this_year = str(match_year.group(0))
+                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                        counter = 1
+                    except AttributeError:
+                        break
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -437,11 +440,14 @@ def update_CFC11():
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
                 if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                    this_year = str(match_year.group(0))
-                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                    counter = 1
+                    try:
+                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                        this_year = str(match_year.group(0))
+                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                        counter = 1
+                    except AttributeError:
+                        break
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -479,11 +485,14 @@ def write_CFC12():
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
                 if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                    this_year = str(match_year.group(0))
-                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                    counter = 1
+                    try:
+                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                        this_year = str(match_year.group(0))
+                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                        counter = 1
+                    except AttributeError:
+                        break
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
@@ -527,11 +536,14 @@ def update_CFC12():
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
                 if (str(match_ppt1.group(0)) != 'nan') and match_ppt1 is not None:
-                    lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
-                    match_ppt2 = re.match(pattern_ppt2, lineEdited)
-                    this_year = str(match_year.group(0))
-                    this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
-                    counter = 1
+                    try:
+                        lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
+                        match_ppt2 = re.match(pattern_ppt2, lineEdited)
+                        this_year = str(match_year.group(0))
+                        this_ppt = str(match_ppt1.group(0)) + str(match_ppt2.group(0))
+                        counter = 1
+                    except AttributeError:
+                        break
                     while counter <= 12:
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
