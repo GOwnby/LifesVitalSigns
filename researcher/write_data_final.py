@@ -627,7 +627,7 @@ def update_All():
     update_Temperature()
 
 def write_All():
-    basepath = os.path.dirname(__file__)
+    basepath = os.getcwd()
     path = os.path.abspath(os.path.join(basepath, "..", "LifesVitalSigns/static/static_dirs/js/json"))
     if not os.path.exists(path):
         os.makedirs(path)
