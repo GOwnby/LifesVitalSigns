@@ -44,22 +44,20 @@ def average_dataset(dataset):
     data = json.load(data)
     newData = {}
     beginYear = 1977
+    entryIndice = 0
     while beginYear <= thisYear:
-        currentSet = {}
         month = 0
-        countMonth = 0
         thisSum = 0.0
-        while month <= 12:
+        while month < 12:
             month +=  1
             try:
-                entry = data[(str(beginYear) + '_' + str(month))]
-                currentSet[month] = entry
+                entry = data[entryIndice]
+                thisSum = thisSum + entry
+                entryIndice += 1
             except KeyError:
-                currentSet[month] = 0.0
-        while countMonth <= 12:
-            countMonth += 1
-            thisSum = thisSum + currentSet[countMonth]
-        average = thisSum / float(countMonth)
+                month = month - 1
+                break
+        average = thisSum / float(month)
         newData[beginYear] = average
         beginYear = beginYear + 1
     outfile = open(filePath, 'w')
