@@ -51,7 +51,7 @@ def average_dataset(dataset):
         while month < 12:
             month +=  1
             try:
-                entry = data[entryIndice]
+                entry = float(data[entryIndice])
                 thisSum = thisSum + entry
                 entryIndice += 1
             except KeyError:
