@@ -388,7 +388,7 @@ def write_CFC11():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                if (str(match_ppt1.group(0)) != 'nan'):
+                if (str(match_ppt1.group(0)) != 'nan') and match_ppt1.group(0) is not None:
                     lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
                     match_ppt2 = re.match(pattern_ppt2, lineEdited)
                     this_year = str(match_year.group(0))
@@ -436,7 +436,7 @@ def update_CFC11():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                if (str(match_ppt1.group(0)) != 'nan'):
+                if (str(match_ppt1.group(0)) != 'nan') and match_ppt1.group(0) is not None:
                     lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
                     match_ppt2 = re.match(pattern_ppt2, lineEdited)
                     this_year = str(match_year.group(0))
@@ -478,7 +478,7 @@ def write_CFC12():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                if (str(match_ppt1.group(0)) != 'nan'):
+                if (str(match_ppt1.group(0)) != 'nan') and match_ppt1.group(0) is not None:
                     lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
                     match_ppt2 = re.match(pattern_ppt2, lineEdited)
                     this_year = str(match_year.group(0))
@@ -526,7 +526,7 @@ def update_CFC12():
                 lineEdited = line.replace(str(match_year.group(0)), '')
                 lineEdited = lineEdited[7:]
                 match_ppt1 = re.match(pattern_ppt1, lineEdited)
-                if (str(match_ppt1.group(0)) != 'nan'):
+                if (str(match_ppt1.group(0)) != 'nan') and match_ppt1.group(0) is not None:
                     lineEdited = lineEdited.replace(str(match_ppt1.group(0)), '')
                     match_ppt2 = re.match(pattern_ppt2, lineEdited)
                     this_year = str(match_year.group(0))
