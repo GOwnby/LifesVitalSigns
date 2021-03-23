@@ -145,31 +145,28 @@ def write_CO2():
     global this_year
     data = {}
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
-    try:
-        fp = open('data/CO2Data.txt')
-        linesInData = 0
-        for line in fp:
-            linesInData += 1
-            if not(re.search('#', line)):
-                match_year = re.search(pattern_year, line)
-                match_ppm = re.search(pattern_ppm, line)
-                if match_year is not None:
-                    if match_ppm is not None:
-                        this_year = match_year.group(0)
-                        this_ppm = match_ppm.group(0)
-                        data[int(this_year)] = float(this_ppm)
 
-        fp.close()
-        basepath = os.getcwd()
-        filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CO2Data.json"))
-        outfile = open(filePath, 'w')
-        json.dump(str(data), outfile)
-        data = None
-        outfile = open('data/CO2DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print("Error writing JSON")
+    fp = open('data/CO2Data.txt')
+    linesInData = 0
+    for line in fp:
+        linesInData += 1
+        if not(re.search('#', line)):
+            match_year = re.search(pattern_year, line)
+            match_ppm = re.search(pattern_ppm, line)
+            if match_year is not None:
+                if match_ppm is not None:
+                    this_year = match_year.group(0)
+                    this_ppm = match_ppm.group(0)
+                    data[int(this_year)] = float(this_ppm)
+    fp.close()
+
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CO2Data.json'
+    outfile = open(filePath, 'w')
+    json.dump(data, outfile)
+    data = None
+    outfile = open('data/CO2DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def update_CO2():
@@ -179,34 +176,31 @@ def update_CO2():
     global this_year
     data = {}
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
-    try:
-        fp = open('data/CO2DataLines.txt')
-        for line in fp:
-            linesInData = int(line)
-        fp = open('data/CO2Data.txt')
-        updatedFile = itertools.islice(fp, linesInData)
-        fp.close()
-        for line in updatedFile:
-            linesInData += 1
-            match_year = re.search(pattern_year, line)
-            match_ppm = re.search(pattern_ppm, line)
-            if match_year is not None:
-                if match_ppm is not None:
-                    this_year = match_year.group(0)
-                    this_ppm = match_ppm.group(0)
-                    data[int(this_year)] = float(this_ppm)
 
-        basepath = os.getcwd()
-        filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CO2Data.json"))
-        outfile = open(filePath, 'a')
-        json.dump(str(data), outfile)
-        data = None
-        updatedFile = None
-        outfile = open('data/CO2DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print('Error updating JSON')
+    fp = open('data/CO2DataLines.txt')
+    for line in fp:
+        linesInData = int(line)
+    fp = open('data/CO2Data.txt')
+    updatedFile = itertools.islice(fp, linesInData)
+    fp.close()
+    for line in updatedFile:
+        linesInData += 1
+        match_year = re.search(pattern_year, line)
+        match_ppm = re.search(pattern_ppm, line)
+        if match_year is not None:
+            if match_ppm is not None:
+                this_year = match_year.group(0)
+                this_ppm = match_ppm.group(0)
+                data[int(this_year)] = float(this_ppm)
+
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CO2Data.json'
+    outfile = open(filePath, 'a')
+    json.dump(data, outfile)
+    data = None
+    updatedFile = None
+    outfile = open('data/CO2DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def write_N2O():
@@ -240,10 +234,9 @@ def write_N2O():
                         counter += 1
     fp.close()
 
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json'
     outfile = open(filePath, 'w')
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     learn_data.average_dataset('N2O')
     data = None
     outfile = open('data/N2ODataLines.txt', 'w')
@@ -287,10 +280,9 @@ def update_N2O():
                         counter += 1
     updatedFile.close()
 
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/N2OData.json"))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json'
     outfile = open(filePath, 'a')
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/N2ODataLines.txt', 'w')
@@ -305,31 +297,28 @@ def write_CH4():
     global this_year
     data = {}
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
-    try:
-        fp = open('data/CH4Data.txt')
-        linesInData = 0
-        for line in fp:
-            linesInData += 1
-            if not(re.search('#', line)):
-                match_year = re.search(pattern_year, line)
-                match_ppb = re.search(pattern_ppb, line)
-                if match_year is not None:
-                    if match_ppb is not None:
-                        this_year = match_year.group(0)
-                        this_ppb = match_ppb.group(0)
-                        data[int(this_year)] = float(this_ppb)
 
-        fp.close()
-        basepath = os.getcwd()
-        filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CH4Data.json"))
-        outfile = open(filePath, 'w')    
-        json.dump(str(data), outfile)
-        data = None
-        outfile = open('data/CO2DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print("Error retrieving file")
+    fp = open('data/CH4Data.txt')
+    linesInData = 0
+    for line in fp:
+        linesInData += 1
+        if not(re.search('#', line)):
+            match_year = re.search(pattern_year, line)
+            match_ppb = re.search(pattern_ppb, line)
+            if match_year is not None:
+                if match_ppb is not None:
+                    this_year = match_year.group(0)
+                    this_ppb = match_ppb.group(0)
+                    data[int(this_year)] = float(this_ppb)
+    fp.close()
+
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CH4Data.json'
+    outfile = open(filePath, 'w')    
+    json.dump(data, outfile)
+    data = None
+    outfile = open('data/CO2DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def update_CH4():
@@ -339,34 +328,31 @@ def update_CH4():
     global this_year
     data = {}
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
-    try:
-        fp = open('data/CH4DataLines.txt')
-        for line in fp:
-            linesInData = int(line)
-        fp = open('data/CH4Data.txt')
-        updatedFile = itertools.islice(fp, linesInData)
-        fp.close()
-        for line in updatedFile:
-            linesInData += 1
-            match_year = re.search(pattern_year, line)
-            match_ppb = re.search(pattern_ppb, line)
-            if match_year is not None:
-                if match_ppb is not None:
-                    this_year = match_year.group(0)
-                    this_ppb = match_ppb.group(0)
-                    data[int(this_year)] = float(this_ppb)
 
-        basepath = os.getcwd()
-        filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CH4Data.json"))
-        outfile = open(filePath, 'a')
-        json.dump(str(data), outfile)
-        data = None
-        updatedFile = None
-        outfile = open('data/CH4DataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print('Error updating JSON')
+    fp = open('data/CH4DataLines.txt')
+    for line in fp:
+        linesInData = int(line)
+    fp = open('data/CH4Data.txt')
+    updatedFile = itertools.islice(fp, linesInData)
+    fp.close()
+    for line in updatedFile:
+        linesInData += 1
+        match_year = re.search(pattern_year, line)
+        match_ppb = re.search(pattern_ppb, line)
+        if match_year is not None:
+            if match_ppb is not None:
+                this_year = match_year.group(0)
+                this_ppb = match_ppb.group(0)
+                data[int(this_year)] = float(this_ppb)
+
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CH4Data.json'
+    outfile = open(filePath, 'a')
+    json.dump(data, outfile)
+    data = None
+    updatedFile = None
+    outfile = open('data/CH4DataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def write_CFC11():
@@ -403,10 +389,9 @@ def write_CFC11():
                         counter += 1
     fp.close()
 
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
     outfile = open(filePath, 'w')   
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     learn_data.average_dataset('CFC11')
     data = None
     outfile = open('data/CFC11DataLines.txt', 'w')
@@ -452,12 +437,10 @@ def update_CFC11():
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
                         counter += 1
-    updatedFile.close()
 
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json"))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
     outfile = open(filePath, 'a')
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/CFC11DataLines.txt', 'w')
@@ -499,10 +482,9 @@ def write_CFC12():
                         counter += 1
     fp.close()
 
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
     outfile = open(filePath, 'w')  
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     learn_data.average_dataset('CFC12')
     data = None
     outfile = open('data/CFC12DataLines.txt', 'w')
@@ -548,12 +530,10 @@ def update_CFC12():
                         year_month = this_year + '_' + str(counter)
                         data[year_month] = float(this_ppt)
                         counter += 1
-    updatedFile.close()
 
-    basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json"))
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
     outfile = open(filePath, 'a')
-    json.dump(str(data), outfile)
+    json.dump(data, outfile)
     data = None
     updatedFile = None
     outfile = open('data/CFC12DataLines.txt', 'w')
@@ -567,31 +547,27 @@ def write_Temperature():
     global linesInData
     data = {}
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
-    try:
-        fp = open('data/TemperatureData.txt')
-        linesInData = 0
-        for line in fp:
-            linesInData += 1
-            match_year = re.search(pattern_year, line)
-            match_temp = re.search(pattern_temp, line)
-            if match_year is not None:
-                if match_temp is not None:
-                    this_year = match_year.group(0)
-                    this_temp = match_temp.group(0)
-                    data[int(this_year)] = float(this_temp)
 
-        fp.close()
-        basepath = os.getcwd()
-        filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json"))
-        outfile = open(filePath, 'w')      
-        json.dump(str(data), outfile)
-        data = None
-        outfile = open('data/TemperatureDataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print("Error retrieving file")
+    fp = open('data/TemperatureData.txt')
+    linesInData = 0
+    for line in fp:
+        linesInData += 1
+        match_year = re.search(pattern_year, line)
+        match_temp = re.search(pattern_temp, line)
+        if match_year is not None:
+            if match_temp is not None:
+                this_year = match_year.group(0)
+                this_temp = match_temp.group(0)
+                data[int(this_year)] = float(this_temp)
+    fp.close()
 
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json'
+    outfile = open(filePath, 'w')      
+    json.dump(data, outfile)
+    data = None
+    outfile = open('data/TemperatureDataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 def update_Temperature():
     global data
@@ -599,35 +575,32 @@ def update_Temperature():
     global linesInData
     data = {}
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
-    try:
-        fp = open('data/TemperatureDataLines.txt')
-        for line in fp:
-            linesInData = int(line)
-        fp = open('data/TemperatureData.txt')
-        updatedFile = itertools.islice(fp, linesInData)
-        fp.close()
-        
-        for line in updatedFile:
-            linesInData += 1
-            match_year = re.search(pattern_year, line)
-            match_temp = re.search(pattern_temp, line)
-            if match_year is not None:
-                if match_temp is not None:
-                    this_year = match_year.group(0)
-                    this_temp = match_temp.group(0)
-                    data[int(this_year)] = float(this_temp)
 
-        basepath = os.getcwd()
-        filePath = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json"))
-        outfile = open(filePath, 'a')
-        json.dump(str(data), outfile)
-        data = None
-        updatedFile = None
-        outfile = open('data/TemperatureDataLines.txt', 'w')
-        outfile.write(str(linesInData))
-        outfile.close()
-    except Exception:
-        print('Error updating JSON')
+    fp = open('data/TemperatureDataLines.txt')
+    for line in fp:
+        linesInData = int(line)
+    fp = open('data/TemperatureData.txt')
+    updatedFile = itertools.islice(fp, linesInData)
+    fp.close()
+        
+    for line in updatedFile:
+        linesInData += 1
+        match_year = re.search(pattern_year, line)
+        match_temp = re.search(pattern_temp, line)
+        if match_year is not None:
+                if match_temp is not None:
+                this_year = match_year.group(0)
+                this_temp = match_temp.group(0)
+                data[int(this_year)] = float(this_temp)
+
+    filePath = 'LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json'
+    outfile = open(filePath, 'a')
+    json.dump(data, outfile)
+    data = None
+    updatedFile = None
+    outfile = open('data/TemperatureDataLines.txt', 'w')
+    outfile.write(str(linesInData))
+    outfile.close()
 
 
 def update_All():
