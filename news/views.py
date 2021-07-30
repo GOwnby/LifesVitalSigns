@@ -37,7 +37,7 @@ def index(request):
     while (entry_counter > (entry_endcount - 10)):
         try:
             this_entry = Article.objects.get(pk=entry_counter)
-        except:
+        except Exception:
             break
         else:
             news_entry = ArticleObject(this_entry.entry, this_entry.title, this_entry.posted_date, this_entry.text_preview)
@@ -83,7 +83,7 @@ def archives(request, page):
     while (entry_counter > (entry_endcount - 10)):
         try:
             this_entry = Article.objects.get(pk=entry_counter)
-        except:
+        except Exception:
             break
         else:
             news_entry = ArticleObject(this_entry.entry, this_entry.title, this_entry.posted_date, this_entry.text_preview)

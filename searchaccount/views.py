@@ -15,7 +15,7 @@ def index(request):
             username = form.cleaned_data['username']
             try:
                 user = ProfileKey.objects.get(pk = username)
-            except:
+            except BaseException:
                 return HttpResponse('User could not be found')
 
                 return render(request, 'searchresults/searchresults.html', {'names':related})

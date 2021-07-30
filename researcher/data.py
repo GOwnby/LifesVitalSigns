@@ -1,6 +1,5 @@
 import urllib.request
 import os
-from . import write_data_final
 import time
 
 

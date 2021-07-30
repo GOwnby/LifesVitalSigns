@@ -16,7 +16,7 @@ class Account(models.Model):
     level_text = models.CharField(max_length=50, default='Citizen Scientist')
     posts = models.IntegerField(default=0)
     forum_signature = models.CharField(max_length=100, default='No Signature')
-    uuid = models.CharField(max_length=500, default='defaultforDB')
+    uuid = models.CharField(max_length=200, default='defaultforDB')
 
 class ClimateScienceEntry(models.Model):
     title = models.CharField(max_length=50)

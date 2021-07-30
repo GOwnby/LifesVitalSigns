@@ -31,16 +31,16 @@ ALLOWED_HOSTS = ['3.80.94.131']
 # Application definition
 
 INSTALLED_APPS = [
-    'researcher.apps.ResearcherConfig',
-    'news.apps.NewsConfig',
-    'searchaccount.apps.SearchaccountConfig',
-    'forum.apps.ForumConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'researcher.apps.ResearcherConfig',
+    'news.apps.NewsConfig',
+    'searchaccount.apps.SearchaccountConfig',
+    'forum.apps.ForumConfig',
 ]
 
 MIDDLEWARE = [
@@ -84,12 +84,12 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'LVSTable01',
-    }
-}
+#CACHES = {
+#   'default': {
+#      'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#     'LOCATION': 'LVSTable01',
+#   }
+#}
 
 
 # Password validation
@@ -139,7 +139,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'LifesVitalSigns/static')]
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#MEDIA_URL = '/media/'
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
