@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 
-from . import forms as myForms
-from . import models as myModels
+from forum import forms as myForms
+from forum import models as myModels
 from searchaccount.models import ProfileKey
 from searchaccount.forms import SearchForm
 import uuid
