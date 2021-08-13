@@ -53,7 +53,7 @@ def run():
     update(TIME_STRINGS, TIME_STAMPS)
 
 
-def update(TIME_STRINGS, TIME_STAMPS)
+def update(TIME_STRINGS, TIME_STAMPS):
     FILES_UPDATED = False
     if (int(TIME_STAMPS[3][2]) > int(TIME_STAMPS[1][2])) or (TIME_STRINGS[1] == '00-00=0000'):
         try:
