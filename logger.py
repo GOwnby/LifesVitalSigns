@@ -5,7 +5,7 @@ import datetime
 
 def write_status(SERVER_STARTED_TIMESTAMP, FILES_UPDATED_TIMESTAMP, JSON_UPDATED_TIMESTAMP):
     log = open('Log.txt', 'w')
-    log.write(SERVER_STARTED_TIMESTAMP + ',' + FILES_UPDATED_TIMESTAMP + ',' + JSON_UPDATED_TIMESTAMP + "\n")
+    log.write(SERVER_STARTED_TIMESTAMP + ',' + FILES_UPDATED_TIMESTAMP + ',' + JSON_UPDATED_TIMESTAMP)
     log.close()
 
 
@@ -47,8 +47,15 @@ def run():
     CURRENT_TIME_STAMPS[1] = CURRENT_TIME_STAMPS2[0]
     CURRENT_TIME_STAMPS.append(CURRENT_TIME_STAMPS2[1])
 
+    TIME_STRINGS = [SERVER_LAST_STARTED, FILES_LAST_UPDATED, JSON_LAST_UPDATED, CURRENT_TIME]
+    TIME_STAMPS = [SERVER_LAST_STARTED_STAMPS, FILES_LAST_UPDATED_STAMPS, JSON_LAST_UPDATED_STAMPS, CURRENT_TIME_STAMPS]
+    
+    update(TIME_STRINGS, TIME_STAMPS)
+
+
+def update(TIME_STRINGS, TIME_STAMPS)
     FILES_UPDATED = False
-    if (int(CURRENT_TIME_STAMPS[2]) > int(FILES_LAST_UPDATED_STAMPS[2])) or (FILES_LAST_UPDATED == '00-00=0000'):
+    if (int(TIME_STAMPS[3][2]) > int(TIME_STAMPS[1][2])) or (TIME_STRINGS[1] == '00-00=0000'):
         try:
             retrieve_All()
             FILES_UPDATED = True
@@ -57,8 +64,8 @@ def run():
             FILES_UPDATED = False
             print('Files failed to update')
     
-    if int(CURRENT_TIME_STAMPS[2]) == int(FILES_LAST_UPDATED_STAMPS[2]):
-        if int(CURRENT_TIME_STAMPS[1]) > int(FILES_LAST_UPDATED_STAMPS[1]):
+    if int(TIME_STAMPS[3][2]) == int(TIME_STAMPS[1][2]):
+        if int(TIME_STAMPS[3][1]) > int(TIME_STAMPS[1][1]):
             try:
                 retrieve_All()
                 FILES_UPDATED = True
@@ -68,7 +75,7 @@ def run():
                 print('Files failed to update')
 
     JSON_UPDATED = False
-    if JSON_LAST_UPDATED == '00-00=0000':
+    if TIME_STRINGS[2] == '00-00=0000':
         try:
             write_All()
             JSON_UPDATED = True
@@ -80,14 +87,14 @@ def run():
         if not(JSON_UPDATED):
             try:
                 update_All()
+                JSON_UPDATED = True
                 print('JSON updated')
             except Exception:
                 print('JSON failed to update')
 
     if FILES_UPDATED:
         if JSON_UPDATED:
-            write_status(CURRENT_TIME, CURRENT_TIME, CURRENT_TIME)
-        write_status(CURRENT_TIME, CURRENT_TIME, JSON_LAST_UPDATED)
+            write_status(TIME_STRINGS[3], TIME_STRINGS[3], TIME_STRINGS[3])
+        write_status(TIME_STRINGS[3], TIME_STRINGS[3], TIME_STRINGS[2])
     else:
-        write_status(CURRENT_TIME, FILES_LAST_UPDATED, JSON_LAST_UPDATED)
-
+        write_status(TIME_STRINGS[3], TIME_STRINGS[1], TIME_STRINGS[2])
