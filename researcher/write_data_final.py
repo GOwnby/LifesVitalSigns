@@ -454,7 +454,11 @@ def write_CFC12():
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
 
-    fp = open('data/CFC12Data.txt')
+    try:
+        fp = open('data/CFC12Data.txt')
+    except Exception:
+        print('failed to open CFC12 Data Text File')
+
     linesInData = 0
     for line in fp:
         linesInData += 1
@@ -468,9 +472,12 @@ def write_CFC12():
     fp.close()
 
     data = learn_data.average_dataset(data)
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
-    outfile = open(filePath, 'w')  
-    json.dump(data, outfile)
+    try:
+        filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
+        outfile = open(filePath, 'w')  
+        json.dump(data, outfile)
+    except Exception:
+        print('failed to dump CFC12 json file')
     data = None
     outfile = open('data/CFC12DataLines.txt', 'w')
     outfile.write(str(linesInData))
