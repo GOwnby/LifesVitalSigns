@@ -225,8 +225,9 @@ def write_N2O():
     global linesInData
     global this_year
     data = {}
-    pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
-    pattern_ppb2 = r'.[0-9][0-9][0-9]'
+    #pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
+    #pattern_ppb2 = r'.[0-9][0-9][0-9]'
+    pattern_ppb = r'[0-9][0-9][0-9].[0-9][0-9][0-9]'
 
     fp = open('data/N2OData.txt')
     linesInData = 0
@@ -235,22 +236,25 @@ def write_N2O():
         if not(re.match('#', line)):
             if re.match(pattern_year, line):
                 match_year = re.match(pattern_year, line)
-                lineEdited = line.replace(str(match_year.group(0)), '')
-                lineEdited = lineEdited[7:]
-                match_ppb1 = re.match(pattern_ppb1, lineEdited)
-                if (str(match_ppb1.group(0)) != 'nan'):
-                    lineEdited = lineEdited.replace(str(match_ppb1.group(0)), '')
-                    match_ppb2 = re.match(pattern_ppb2, lineEdited)
-                    this_year = str(match_year.group(0))
-                    this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
-                    counter = 1
-                    while counter <= 12:
-                        year_month = this_year + '_' + str(counter)
-                        data[year_month] = this_ppb
-                        counter += 1
+                #lineEdited = line.replace(str(match_year.group(0)), '')
+                lineEdited = line[11:] #7:
+                match_ppb = re.match(pattern_ppb, lineEdited)
+                this_year = str(match_year.group(0))
+                this_ppb = str(match_ppb.group(0))
+                #match_ppb1 = re.match(pattern_ppb1, lineEdited)
+                #if (str(match_ppb1.group(0)) != 'nan'):
+                #lineEdited = lineEdited.replace(str(match_ppb1.group(0)), '')
+                #match_ppb2 = re.match(pattern_ppb2, lineEdited)
+                #this_year = str(match_year.group(0))
+                #this_ppb = str(match_ppb1.group(0)) + str(match_ppb2.group(0))
+                counter = 1
+                while counter <= 12:
+                    year_month = this_year + '_' + str(counter)
+                    data[year_month] = this_ppb
+                    counter += 1
     fp.close()
 
-    #data = learn_data.average_dataset(data)
+    data = learn_data.average_dataset(data)
     filePath = 'LifesVitalSigns/static/static_dirs/js/json/N2OData.json'
     outfile = open(filePath, 'w')
     json.dump(data, outfile)
