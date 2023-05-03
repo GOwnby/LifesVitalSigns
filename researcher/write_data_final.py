@@ -332,7 +332,7 @@ def write_CH4():
                     data[int(this_year)] = float(this_ppb)
     fp.close()
 
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CH4Data.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/CH4Data.json'
     outfile = open(filePath, 'w')    
     json.dump(data, outfile)
     data = None
@@ -365,7 +365,7 @@ def update_CH4():
                 this_ppb = match_ppb.group(0)
                 data[int(this_year)] = float(this_ppb)
 
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CH4Data.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/CH4Data.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
     data = None
@@ -398,7 +398,7 @@ def write_CFC11():
     fp.close()
 
     data = learn_data.average_dataset(data)
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
     outfile = open(filePath, 'w')   
     json.dump(data, outfile)
     data = None
@@ -435,7 +435,7 @@ def update_CFC11():
                 data = function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited)
 
     data = learn_data.average_dataset(data)
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
     data = None
@@ -473,7 +473,7 @@ def write_CFC12():
 
     data = learn_data.average_dataset(data)
     try:
-        filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
+        filePath = '../LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
         outfile = open(filePath, 'w')  
         json.dump(data, outfile)
     except Exception:
@@ -512,7 +512,7 @@ def update_CFC12():
                 data = function_try_CFC(match_year, match_ppt1, pattern_ppt2, lineEdited)
 
     data = learn_data.average_dataset(data)
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
     data = None
@@ -542,7 +542,7 @@ def write_Temperature():
                 data[int(this_year)] = float(this_temp)
     fp.close()
 
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json'
     outfile = open(filePath, 'w')      
     json.dump(data, outfile)
     data = None
@@ -574,7 +574,7 @@ def update_Temperature():
                 this_temp = match_temp.group(0)
                 data[int(this_year)] = float(this_temp)
 
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json'
     outfile = open(filePath, 'a')
     json.dump(data, outfile)
     data = None
