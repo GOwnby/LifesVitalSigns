@@ -29,7 +29,7 @@ def findStartYear(dataset):
 
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
+        fp = open('data/' + thisDataset)
     except Exception:
         fp = ''
 
@@ -56,18 +56,18 @@ def findEndYear(dataset):
     if dataset == 'Temperature':
         thisDataset = 'TemperatureData.json'
 
-    with open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
+    with open('../LifesVitalSigns/static/static_dirs/js/json/' + thisDataset) as json_file:
         data = json.load(json_file)
 
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     countLines = 0
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
+        fp = open('data/' + thisDataset)
         for line in fp:
             countLines += 1
     finally:
         thisLine = 0
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/' + thisDataset)
+        fp = open('data/' + thisDataset)
         for line in fp:
             thisLine += 1
             if thisLine == (countLines - 1):
@@ -131,7 +131,7 @@ def write_CO2():
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppm = r'[0-9][0-9][0-9].[0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CO2Data.txt')
+        fp = open('/data/CO2Data.txt')
         for line in fp:
             if not(re.search('#', line)):
                 match_year = re.search(pattern_year, line)
@@ -144,7 +144,7 @@ def write_CO2():
     finally:
         fp.close()
         outfile = open(
-            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
+            '../LifesVitalSigns/static/static_dirs/js/json/CO2Data.json', 'w')
         json.dump(data, outfile)
 
 
@@ -154,7 +154,7 @@ def write_N2O():
     pattern_ppb1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppb2 = r'.[0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/N2OData.txt')
+        fp = open('../LifesVitalSigns/researcher/data/N2OData.txt')
         for line in fp:
             if not(re.match('#', line)):
                 if re.match(pattern_year, line):
@@ -179,8 +179,7 @@ def write_N2O():
                                 data[this_year] = float(this_ppb)
     finally:
         fp.close()
-        outfile = open(
-            '/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
+        outfile = open('../LifesVitalSigns/static/static_dirs/js/json/N2OData.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('N2O')
 
@@ -190,7 +189,7 @@ def write_CH4():
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_ppb = r'[0-9][0-9][0-9][0-9].[0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CH4Data.txt')
+        fp = open('/data/CH4Data.txt')
         for line in fp:
             if not(re.search('#', line)):
                 match_year = re.search(pattern_year, line)
@@ -202,7 +201,7 @@ def write_CH4():
                         data[int(this_year)] = float(this_ppb)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
+        outfile = open('../LifesVitalSigns/static/static_dirs/js/json/CH4Data.json', 'w')
         json.dump(data, outfile)
 
 
@@ -212,7 +211,7 @@ def write_CFC11():
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CFC11Data.txt')
+        fp = open('data/CFC11Data.txt')
         for line in fp:
             if not(re.match('#', line)):
                 if re.match(pattern_year, line):
@@ -235,7 +234,7 @@ def write_CFC11():
                                 data[this_year] = float(this_ppt)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
+        outfile = open('../LifesVitalSigns/static/static_dirs/js/json/CFC11Data.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('CFC11')
 
@@ -246,7 +245,7 @@ def write_CFC12():
     pattern_ppt1 = r'[n0123456789][a0123456789][n0123456789]'
     pattern_ppt2 = r'.[0-9][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/CFC12Data.txt')
+        fp = open('data/CFC12Data.txt')
         for line in fp:
             if not(re.match('#', line)):
                 if re.match(pattern_year, line):
@@ -271,7 +270,7 @@ def write_CFC12():
                                 data[this_year] = float(this_ppt)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
+        outfile = open('../LifesVitalSigns/static/static_dirs/js/json/CFC12Data.json', 'w')
         json.dump(data, outfile)
         learn_data.average_dataset('CFC12')
 
@@ -281,7 +280,7 @@ def write_Temperature():
     pattern_year = r'[0-9][0-9][0-9][0-9]'
     pattern_temp = r'[-]?[0-9][.][0-9][0-9]'
     try:
-        fp = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/researcher/data/TemperatureData.txt')
+        fp = open('data/TemperatureData.txt')
         for line in fp:
             match_year = re.search(pattern_year, line)
             match_temp = re.search(pattern_temp, line)
@@ -292,6 +291,6 @@ def write_Temperature():
                     data[int(this_year)] = float(this_temp)
     finally:
         fp.close()
-        outfile = open('/home/zer0/Desktop/Github/LVSDjango/LifesVitalSigns/LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
+        outfile = open('../LifesVitalSigns/static/static_dirs/js/json/TemperatureData.json', 'w')
         json.dump(data, outfile)
 
