@@ -594,7 +594,7 @@ def update_All():
 
 def write_All():
     basepath = os.getcwd()
-    path = os.path.abspath(os.path.join(basepath, "LifesVitalSigns/static/static_dirs/js/json"))
+    path = os.path.abspath(os.path.join(basepath, "../LifesVitalSigns/static/static_dirs/js/json"))
     if not os.path.exists(path):
         os.makedirs(path)
     write_CO2()
