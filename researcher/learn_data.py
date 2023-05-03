@@ -140,7 +140,7 @@ def basicProjection(dataset):
     endYear = currentYear + 100
 
     basepath = os.getcwd()
-    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
+    filePath = os.path.abspath(os.path.join(basepath, '../LifesVitalSigns/static/static_dirs/js/json/' + thisDataset))
 
     data = open(filePath)
     data = json.load(data)
@@ -164,7 +164,7 @@ def basicProjection(dataset):
         projectedSet[startYear] = projectedSet[startYear - 1] + changeInLoad
         startYear += 1
 
-    filePath = os.path.abspath(os.path.join(basepath, 'LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + 'BasicProjection.json'))
+    filePath = os.path.abspath(os.path.join(basepath, '../LifesVitalSigns/static/static_dirs/js/json/' + thisDataset + 'BasicProjection.json'))
     outfile = open(filePath, 'w')
     json.dump(projectedSet, outfile)
     outfile.close()
@@ -176,7 +176,7 @@ def basicProjection(dataset):
 # https://www.esrl.noaa.gov/gmd/aggi/aggi.html
 def calculateChangeInRadiativeFlux(searchYear):
     thisYear = currentYear()
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/'
 
     # Contains initial values of: CO2 PPM, N2O PPB, CH4 PPB, CFC-11 PPT, CFC-12 PPT
     initialValues = []
@@ -253,7 +253,7 @@ def functionInterdependence(CH4PPB, N2OPBB):
         ( ( (5.31) * ( (10) ** (-15) ) ) * (CH4PPB) * ( ( (CH4PPB) * (N2OPBB) ) ** (1.52) ) ) ) )
 
 def calculateChangeInTemperature(searchYear):
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/'
     with open(filePath + 'TemperatureData.json') as json_file:
         data = json.load(json_file)
 
@@ -317,7 +317,7 @@ def calculateChangeInClimateSensitivityParameter(searchYear):
 # Changes in radiative flux are a function of projected changes in atmospheric composition
 # Changes in the Climate Sensitivity Parameter are a function of projected changes in radiatve flux and the rate of change of the rate of change of temperature
 def projectTemperature():
-    filePath = 'LifesVitalSigns/static/static_dirs/js/json/'
+    filePath = '../LifesVitalSigns/static/static_dirs/js/json/'
     startYear = currentYear()
     nextCentury = startYear + 100
     changesOfChangeInTemperature = {}
